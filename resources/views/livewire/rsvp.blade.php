@@ -6,13 +6,13 @@
                 <h3>Can you attend as a day guest?</h3>
                 <div class="flex gap-4">
                     <button
-                        class="border-dark-green text-xl border-1 w-32 h-16  hover:bg-medium-green cursor-pointer {{ $attending ? 'bg-medium-green' : '' }}"
+                        class="border-dark-green text-xl border-1 w-32 h-16  hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $attending ? 'bg-medium-green' : '' }}"
                         wire:click.prevent="setAttending(true)"
                     >
                         Yes!
                     </button>
                     <button
-                        class="border-dark-green text-xl border-1 w-32 h-16 hover:bg-medium-green cursor-pointer {{ $attending === false ? 'bg-medium-green' : '' }}"
+                        class="border-dark-green text-xl border-1 w-32 h-16 hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $attending === false ? 'bg-medium-green' : '' }}"
                         wire:click.prevent="setAttending(false)"
                     >
                         No
@@ -37,13 +37,13 @@
                     <h3>Are there any dietary requirements in your party?</h3>
                     <div class="flex gap-4">
                         <button
-                            class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green cursor-pointer {{ $has_dietary_requirements ? 'bg-medium-green' : '' }}"
+                            class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $has_dietary_requirements ? 'bg-medium-green' : '' }}"
                             wire:click.prevent="setHasDietaryRequirements(true)"
                         >
                             Yes
                         </button>
                         <button
-                            class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green cursor-pointer {{ $has_dietary_requirements === false ? 'bg-medium-green' : '' }}"
+                            class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $has_dietary_requirements === false ? 'bg-medium-green' : '' }}"
                             wire:click.prevent="setHasDietaryRequirements(false)"
                         >
                             No
@@ -73,7 +73,7 @@
             @endif
             @if($attending === false || ($attending === true && $has_dietary_requirements !== null))
                 <div class="flex justify-end">
-                    <button class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green cursor-pointer">Next</button>
+                    <button wire:click.prevent="next" class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green focus:bg-medium-green active:bg-medium-green cursor-pointer">Next</button>
                 </div>
             @endif
         </form>

@@ -20,6 +20,11 @@ class Rsvp extends Component
         $this->rsvp = $rsvp;
     }
 
+    public function next(): bool
+    {
+        return false;
+    }
+
     public function setAttending(bool $attending): void
     {
         $this->attending = $attending;
