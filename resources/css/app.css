@@ -1,3 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "./fonts.css";
+
+@source "../views";
+@plugin '@tailwindcss/typography';
+
+@theme {
+    --color-dark-green: #053e02;
+    --color-medium-green: #b7d7c2;
+    --color-light-green: #e2f7e5;
+}
+
+html {
+    font-family: "Playfair Display", sans-serif;
+    @apply text-dark-green bg-medium-green;
+}
+h1 {
+    font-family: "Baby Bunny Regular", serif;
+}
+#logo:before  {
+    content: "";
+    background-color: #6fae78;
+    @apply absolute w-48 h-48 z-0 rounded-full;
+}
+
+#mobile-nav li:not(:last-child):after {
+    content: "";
+    @apply absolute w-full h-[1px] z-0 rounded-full bg-gradient-to-r from-dark-green to-transparent;
+}
+
+#logo h1, #logo span {
+    @apply z-10;
+}
+#logo span {
+    font-family: "Playfair Display", sans-serif;
+}
+
+h2, h3 {
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+}
+
+a.active {
+    @apply border-b-2 border-b-gray-800;
+}
