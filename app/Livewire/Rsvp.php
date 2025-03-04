@@ -13,6 +13,7 @@ class Rsvp extends Component
     public bool $ryan = false;
     public bool $ada = false;
     public RsvpModel $rsvp;
+    public $attending_guests = [];
 
     public function mount(RsvpModel $rsvp): void
     {

@@ -27,8 +27,8 @@
                 <div class="flex flex-col">
                     <h3>Who's Attending? <span class="text-xs">Tick all that apply</span></h3>
                     <ul>
-                        @foreach($rsvp->guests as $guest)
-                            <li><label for="{{ $guest->id }}"><input type="checkbox" id="{{ $guest->id }}" /> {{$guest->name}}</label></li>
+                        @foreach($rsvp->guests as $index => $guest)
+                            <li><label for="{{ $guest->id }}"><input type="checkbox" id="{{ $guest->id }}" value="{{ $guest->id }}" wire:model="attending_guests" /> {{$guest->name}}</label></li>
                         @endforeach
                     </ul>
                 </div>
@@ -52,50 +52,22 @@
 
                     @if ($has_dietary_requirements)
                         <p class="text-sm">Tell us about them</p>
-
-                        @if($helen)
-                        <div>
-                            <h4 class="font-semibold">Helen Stead</h4>
-                            <ul class="grid grid-cols-2 md:grid-cols-4">
-                                <li><label for="helen_Vegetarian"><input type="checkbox" id="helen_Vegetarian"> Vegetarian</label></li>
-                                <li><label for="helen_Vegan"><input type="checkbox" id="helen_Vegan"> Vegan</label></li>
-                                <li><label for="helen_Pescarian"><input type="checkbox" id="helen_Pescarian"> Pescarian</label></li>
-                                <li><label for="helen_Dairy"><input type="checkbox" id="helen_Dairy"> Dairy Allergy</label></li>
-                                <li><label for="helen_Nut"><input type="checkbox" id="helen_Nut"> Nut Allergy</label></li>
-                                <li><label for="helen_Gluten"><input type="checkbox" id="helen_Gluten"> Gluten/Wheat</label></li>
-                                <li><label for="helen_Other"><input type="checkbox" id="helen_Other"> Other</label></li>
-                            </ul>
-                        </div>
-                        @endif
-
-                        @if($ryan)
-                        <div>
-                            <h4 class="font-semibold">Ryan Stead</h4>
-                            <ul class="grid grid-cols-2 md:grid-cols-4">
-                                <li><label for="ryan_Vegetarian"><input type="checkbox" id="ryan_Vegetarian"> Vegetarian</label></li>
-                                <li><label for="ryan_Vegan"><input type="checkbox" id="ryan_Vegan"> Vegan</label></li>
-                                <li><label for="ryan_Pescarian"><input type="checkbox" id="ryan_Pescarian"> Pescarian</label></li>
-                                <li><label for="ryan_Dairy"><input type="checkbox" id="ryan_Dairy"> Dairy Allergy</label></li>
-                                <li><label for="ryan_Nut"><input type="checkbox" id="ryan_Nut"> Nut Allergy</label></li>
-                                <li><label for="ryan_Gluten"><input type="checkbox" id="ryan_Gluten"> Gluten/Wheat</label></li>
-                                <li><label for="ryan_Other"><input type="checkbox" id="ryan_Other"> Other</label></li>
-                            </ul>
-                        </div>
-                        @endif
-                        @if($ada)
-                        <div>
-                            <h4 class="font-semibold">Ada Stead</h4>
-                            <ul class="grid grid-cols-2 md:grid-cols-4">
-                                <li><label for="ada_Vegetarian"><input type="checkbox" id="ada_Vegetarian"> Vegetarian</label></li>
-                                <li><label for="ada_Vegan"><input type="checkbox" id="ada_Vegan"> Vegan</label></li>
-                                <li><label for="ada_Pescarian"><input type="checkbox" id="ada_Pescarian"> Pescarian</label></li>
-                                <li><label for="ada_Dairy"><input type="checkbox" id="ada_Dairy"> Dairy Allergy</label></li>
-                                <li><label for="ada_Nut"><input type="checkbox" id="ada_Nut"> Nut Allergy</label></li>
-                                <li><label for="ada_Gluten"><input type="checkbox" id="ada_Gluten"> Gluten/Wheat</label></li>
-                                <li><label for="ada_Other"><input type="checkbox" id="ada_Other"> Other</label></li>
-                            </ul>
-                        </div>
-                        @endif
+                        @foreach($rsvp->guests as $guest)
+                            @if(in_array($guest->id, $attending_guests))
+                            <div>
+                                <h4 class="font-semibold">{{ $guest->name }}</h4>
+                                <ul class="grid grid-cols-2 md:grid-cols-4">
+                                    <li><label for="helen_Vegetarian"><input type="checkbox" id="helen_Vegetarian"> Vegetarian</label></li>
+                                    <li><label for="helen_Vegan"><input type="checkbox" id="helen_Vegan"> Vegan</label></li>
+                                    <li><label for="helen_Pescarian"><input type="checkbox" id="helen_Pescarian"> Pescarian</label></li>
+                                    <li><label for="helen_Dairy"><input type="checkbox" id="helen_Dairy"> Dairy Allergy</label></li>
+                                    <li><label for="helen_Nut"><input type="checkbox" id="helen_Nut"> Nut Allergy</label></li>
+                                    <li><label for="helen_Gluten"><input type="checkbox" id="helen_Gluten"> Gluten/Wheat</label></li>
+                                    <li><label for="helen_Other"><input type="checkbox" id="helen_Other"> Other</label></li>
+                                </ul>
+                            </div>
+                            @endif
+                        @endforeach
                     @endif
                 </div>
             @endif
