@@ -12,7 +12,7 @@
 
 html {
     font-family: "Playfair Display", sans-serif;
-    @apply text-dark-green bg-medium-green;
+    @apply text-dark-green bg-medium-green subpixel-antialiased;
 }
 h1 {
     font-family: "Baby Bunny Regular", serif;

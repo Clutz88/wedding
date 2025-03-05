@@ -5,18 +5,16 @@
             <div class="flex flex-col gap-4">
                 <h3>Can you attend as a day guest?</h3>
                 <div class="flex gap-4">
-                    <button
-                        class="border-dark-green text-xl border-1 w-32 h-16  hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $attending ? 'bg-medium-green' : '' }}"
+                    <x-button
+                        :active="$attending"
                         wire:click.prevent="setAttending(true)"
-                    >
-                        Yes!
-                    </button>
-                    <button
-                        class="border-dark-green text-xl border-1 w-32 h-16 hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $attending === false ? 'bg-medium-green' : '' }}"
+                        text="Yes!"
+                    />
+                    <x-button
+                        :active="$attending === false"
                         wire:click.prevent="setAttending(false)"
-                    >
-                        No
-                    </button>
+                        text="No"
+                    />
                 </div>
                 @if($attending)
                     <p class="text-sm">Woohoo! We can't wait to see you there! 🥳</p>
@@ -28,42 +26,45 @@
                     <h3>Who's Attending? <span class="text-xs">Tick all that apply</span></h3>
                     <ul>
                         @foreach($rsvp->guests as $index => $guest)
-                            <li><label for="{{ $guest->id }}"><input type="checkbox" id="{{ $guest->id }}" value="{{ $guest->id }}" wire:model="attending_guests" /> {{$guest->name}}</label></li>
+                            <li><x-toggle :id="$guest->id" model="attending_guests" :text="$guest->name" /></li>
                         @endforeach
                     </ul>
                 </div>
 
                 <div class="flex flex-col gap-4">
+                    @if (!empty($attending_guests))
                     <h3>Are there any dietary requirements in your party?</h3>
                     <div class="flex gap-4">
-                        <button
-                            class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $has_dietary_requirements ? 'bg-medium-green' : '' }}"
+                        <x-button
+                            :active="$has_dietary_requirements"
                             wire:click.prevent="setHasDietaryRequirements(true)"
-                        >
-                            Yes
-                        </button>
-                        <button
-                            class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $has_dietary_requirements === false ? 'bg-medium-green' : '' }}"
+                            text="Yes"
+                        />
+                        <x-button
+                            :active="$has_dietary_requirements === false"
                             wire:click.prevent="setHasDietaryRequirements(false)"
-                        >
-                            No
-                        </button>
+                            text="No"
+                        />
                     </div>
+                    @endif
 
-                    @if ($has_dietary_requirements)
+                    @if (!empty($attending_guests) && $has_dietary_requirements)
                         <p class="text-sm">Tell us about them</p>
                         @foreach($rsvp->guests as $guest)
                             @if(in_array($guest->id, $attending_guests))
                             <div>
                                 <h4 class="font-semibold">{{ $guest->name }}</h4>
                                 <ul class="grid grid-cols-2 md:grid-cols-4">
-                                    <li><label for="helen_Vegetarian"><input type="checkbox" id="helen_Vegetarian"> Vegetarian</label></li>
-                                    <li><label for="helen_Vegan"><input type="checkbox" id="helen_Vegan"> Vegan</label></li>
-                                    <li><label for="helen_Pescarian"><input type="checkbox" id="helen_Pescarian"> Pescarian</label></li>
-                                    <li><label for="helen_Dairy"><input type="checkbox" id="helen_Dairy"> Dairy Allergy</label></li>
-                                    <li><label for="helen_Nut"><input type="checkbox" id="helen_Nut"> Nut Allergy</label></li>
-                                    <li><label for="helen_Gluten"><input type="checkbox" id="helen_Gluten"> Gluten/Wheat</label></li>
-                                    <li><label for="helen_Other"><input type="checkbox" id="helen_Other"> Other</label></li>
+                                    @foreach(\App\Enums\DietaryRequirements::cases() as $requirement)
+
+                                        <li>
+                                            <x-toggle
+                                                :id="$guest->id.'_'.$requirement->value"
+                                                :value="$requirement->value"
+                                                :text="$requirement->value"
+                                            />
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             @endif
@@ -73,7 +74,10 @@
             @endif
             @if($attending === false || ($attending === true && $has_dietary_requirements !== null))
                 <div class="flex justify-end">
-                    <button wire:click.prevent="next" class="border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green focus:bg-medium-green active:bg-medium-green cursor-pointer">Next</button>
+                    <x-button
+                        wire:click.prevent="next"
+                        text="Next"
+                    />
                 </div>
             @endif
         </form>
