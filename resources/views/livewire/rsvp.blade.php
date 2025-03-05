@@ -22,9 +22,9 @@
             </div>
 
             @if($attending)
-                <div class="flex flex-col">
+                <div class="flex flex-col gap-4">
                     <h3>Who's Attending? <span class="text-xs">Tick all that apply</span></h3>
-                    <ul>
+                    <ul class="flex flex-col gap-2">
                         @foreach($rsvp->guests as $index => $guest)
                             <li><x-toggle :id="$guest->id" model="attending_guests" :text="$guest->name" /></li>
                         @endforeach
@@ -52,28 +52,14 @@
                         <p class="text-sm">Tell us about them</p>
                         @foreach($rsvp->guests as $guest)
                             @if(in_array($guest->id, $attending_guests))
-                            <div>
-                                <h4 class="font-semibold">{{ $guest->name }}</h4>
-                                <ul class="grid grid-cols-2 md:grid-cols-4">
-                                    @foreach(\App\Enums\DietaryRequirements::cases() as $requirement)
-
-                                        <li>
-                                            <x-toggle
-                                                :id="$guest->id.'_'.$requirement->value"
-                                                :value="$requirement->value"
-                                                :text="$requirement->value"
-                                            />
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                                <x-rsvp.dietary-requirements :guest="$guest" />
                             @endif
                         @endforeach
                     @endif
                 </div>
             @elseif ($attending !== null)
                 <label for="message" class="block mb-2 text-sm font-medium">We're sorry you can't make it, use the box below to leave a message.</label>
-                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm placeholder-dark-green rounded-lg border border-dark-green " placeholder="Write your thoughts here..."></textarea>
+                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm placeholder-dark-green bg-white rounded-lg border border-dark-green " placeholder="Write your thoughts here..."></textarea>
             @endif
             @if($attending === false || ($attending === true && $has_dietary_requirements !== null))
                 <div class="flex justify-end">

@@ -10,7 +10,7 @@
     --color-light-green: #e2f7e5;
 }
 
-html {
+html, body {
     font-family: "Playfair Display", sans-serif;
     @apply text-dark-green bg-medium-green subpixel-antialiased;
 }
