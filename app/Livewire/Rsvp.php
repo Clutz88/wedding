@@ -8,11 +8,17 @@ use Livewire\Component;
 class Rsvp extends Component
 {
     public ?bool $attending = null;
+
     public ?bool $has_dietary_requirements = null;
+
     public bool $helen = false;
+
     public bool $ryan = false;
+
     public bool $ada = false;
+
     public RsvpModel $rsvp;
+
     public $attending_guests = [];
 
     public function mount(RsvpModel $rsvp): void

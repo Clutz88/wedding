@@ -4,9 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\PageStatus;
 use App\Filament\Resources\PageResource\Pages;
-use App\Filament\Resources\PageResource\RelationManagers\PageSeoRelationManager;
 use App\Models\Page;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -49,7 +47,7 @@ class PageResource extends Resource
                             ->label('Page Title'),
                         TextInput::make('description')
                             ->label('Page Description'),
-                    ])
+                    ]),
             ]);
     }
 

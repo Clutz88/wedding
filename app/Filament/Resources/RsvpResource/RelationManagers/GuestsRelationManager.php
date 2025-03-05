@@ -9,9 +9,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\AssociateAction;
-use Filament\Tables\Actions\AttachAction;
 use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
@@ -39,11 +37,11 @@ class GuestsRelationManager extends RelationManager
 
                 Placeholder::make('created_at')
                     ->label('Created Date')
-                    ->content(fn(?Guest $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                    ->content(fn (?Guest $record): string => $record?->created_at?->diffForHumans() ?? '-'),
 
                 Placeholder::make('updated_at')
                     ->label('Last Modified Date')
-                    ->content(fn(?Guest $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->content(fn (?Guest $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
 
                 Checkbox::make('attending'),
             ]);
@@ -77,7 +75,7 @@ class GuestsRelationManager extends RelationManager
             ])
             ->headerActions([
                 AssociateAction::make()
-                    ->multiple()
+                    ->multiple(),
             ])
             ->actions([
                 EditAction::make(),

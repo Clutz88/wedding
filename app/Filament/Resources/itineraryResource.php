@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\itineraryResource\Pages;
 use App\Models\Itinerary;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -53,8 +51,7 @@ class itineraryResource extends Resource
                 TextColumn::make('description'),
 
                 TextColumn::make('time')
-                    ->time()
-                ,
+                    ->time(),
             ])
             ->filters([
                 //

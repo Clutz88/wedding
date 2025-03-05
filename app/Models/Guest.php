@@ -12,6 +12,7 @@ class Guest extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
+
     protected $keyType = 'string';
 
     public function rsvp(): BelongsTo

@@ -14,7 +14,6 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\HtmlString;
@@ -46,7 +45,7 @@ class GuestResource extends Resource
                     ->label('Age Group'),
                 Select::make('dietary_requirements')
                     ->multiple()
-                    ->options(DietaryRequirements::class)
+                    ->options(DietaryRequirements::class),
             ]);
     }
 
@@ -60,8 +59,8 @@ class GuestResource extends Resource
                     ->separator(),
                 TextColumn::make('id')
                     ->formatStateUsing(fn (string $state): HtmlString => new HtmlString(QrCode::size(100)->generate($state))),
-//                    ->getStateUsing(fn ($record): string => str(QrCode::size(100)->generate($record->id))->ltrim('<!--?xml version="1.0" encoding="UTF-8"?-->'))
-//                    ->html(),
+                //                    ->getStateUsing(fn ($record): string => str(QrCode::size(100)->generate($record->id))->ltrim('<!--?xml version="1.0" encoding="UTF-8"?-->'))
+                //                    ->html(),
             ])
             ->filters([
                 //
