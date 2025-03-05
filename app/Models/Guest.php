@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Guest extends Model
 {
@@ -14,9 +14,9 @@ class Guest extends Model
     protected $guarded = ['id'];
     protected $keyType = 'string';
 
-    public function rsvps(): BelongsToMany
+    public function rsvp(): BelongsTo
     {
-        return $this->belongsToMany(Rsvp::class, 'rsvp_guest', 'guest_id', 'rsvp_id');
+        return $this->belongsTo(Rsvp::class);
     }
 
     protected function casts(): array

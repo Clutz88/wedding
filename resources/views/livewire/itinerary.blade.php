@@ -1,5 +1,5 @@
 <x-slot:title>Itinerary</x-slot:title>
-<div class="flex my-12 bg-light-green mx-4">
+<x-section>
     <ol class="relative border-s border-gray-200 dark:border-gray-700 m-4">
         @foreach($itineraries as $itinerary)
         <li class="mb-10 ms-4">
@@ -10,6 +10,4 @@
         </li>
         @endforeach
     </ol>
-
-
-</div>
+</x-section>
