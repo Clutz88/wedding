@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "./fonts.css";
+@import 'tailwindcss';
+@import './fonts.css';
 
 @source "../views";
 @plugin '@tailwindcss/typography';
@@ -10,33 +10,36 @@
     --color-light-green: #e2f7e5;
 }
 
-html, body {
-    font-family: "Playfair Display", sans-serif;
+html,
+body {
+    font-family: 'Playfair Display', sans-serif;
     @apply text-dark-green bg-medium-green subpixel-antialiased;
 }
 h1 {
-    font-family: "Baby Bunny Regular", serif;
+    font-family: 'Baby Bunny Regular', serif;
 }
-#logo:before  {
-    content: "";
+#logo:before {
+    content: '';
     background-color: #6fae78;
-    @apply absolute w-48 h-48 z-0 rounded-full;
+    @apply absolute z-0 h-48 w-48 rounded-full;
 }
 
 #mobile-nav li:not(:last-child):after {
-    content: "";
-    @apply absolute w-full h-[1px] z-0 rounded-full bg-gradient-to-r from-dark-green to-transparent;
+    content: '';
+    @apply from-dark-green absolute z-0 h-[1px] w-full rounded-full bg-gradient-to-r to-transparent;
 }
 
-#logo h1, #logo span {
+#logo h1,
+#logo span {
     @apply z-10;
 }
 #logo span {
-    font-family: "Playfair Display", sans-serif;
+    font-family: 'Playfair Display', sans-serif;
 }
 
-h2, h3 {
-    font-family: "Playfair Display", serif;
+h2,
+h3 {
+    font-family: 'Playfair Display', serif;
     font-weight: 500;
 }
 

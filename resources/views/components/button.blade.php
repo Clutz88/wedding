@@ -1,5 +1,5 @@
 <button
-    class="rounded shadow border-dark-green border-1 w-36 h-18 text-xl hover:bg-medium-green cursor-pointer focus:bg-medium-green active:bg-medium-green {{ $active ?? false ? 'bg-medium-green' : '' }}"
+    class="border-dark-green hover:bg-medium-green focus:bg-medium-green active:bg-medium-green {{ $active ?? false ? 'bg-medium-green' : '' }} h-18 w-36 cursor-pointer rounded border-1 text-xl shadow"
     {{ $attributes->merge() }}
 >
     {{ $text }}

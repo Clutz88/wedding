@@ -1,4 +1,6 @@
-<div id="logo" class="flex flex-col items-center my-4">
-    <h1 class="text-7xl border-b-2 pb-1 mt-12">{{ \App\Facades\Wedding::groom() }} & {{ \App\Facades\Wedding::bride() }}</h1>
-    <span class="mt-2 font-semibold text-lg">{{ \App\Facades\Wedding::date()->format('l jS F') }}</span>
+<div id="logo" class="my-4 flex flex-col items-center">
+    <h1 class="mt-12 border-b-2 pb-1 text-7xl">
+        {{ \App\Facades\Wedding::groom() }} & {{ \App\Facades\Wedding::bride() }}
+    </h1>
+    <span class="mt-2 text-lg font-semibold">{{ \App\Facades\Wedding::date()->format('l jS F') }}</span>
 </div>

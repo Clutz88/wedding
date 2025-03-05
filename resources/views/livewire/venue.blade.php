@@ -5,7 +5,7 @@
         height="450"
         allowfullscreen=""
         loading="lazy"
-        class="border-0 w-full"
+        class="w-full border-0"
         referrerpolicy="no-referrer-when-downgrade"
     />
 </x-section>
