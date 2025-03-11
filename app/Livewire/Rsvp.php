@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Guest;
 use App\Models\Rsvp as RsvpModel;
 use Livewire\Component;
 
@@ -11,24 +12,26 @@ class Rsvp extends Component
 
     public ?bool $has_dietary_requirements = null;
 
-    public bool $helen = false;
-
-    public bool $ryan = false;
-
-    public bool $ada = false;
+    public bool $overview = false;
 
     public RsvpModel $rsvp;
 
-    public $attending_guests = [];
+    public array $attending_guests = [];
+    public array $dietary_requirements = [];
 
     public function mount(RsvpModel $rsvp): void
     {
         $this->rsvp = $rsvp;
     }
 
-    public function next(): bool
+    public function getGuest(string $id): Guest
     {
-        return false;
+        return $this->guests->where('id', $id)->first();
+    }
+
+    public function setOverview(bool $overview): void
+    {
+        $this->overview = $overview;
     }
 
     public function setAttending(bool $attending): void
@@ -43,6 +46,6 @@ class Rsvp extends Component
 
     public function render()
     {
-        return view('livewire.rsvp');
+        return $this->overview ? view('livewire.rsvp.overview') : view('livewire.rsvp');
     }
 }

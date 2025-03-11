@@ -12,7 +12,6 @@ enum DietaryRequirements: string implements HasLabel
     case DAIRY_FREE = 'Dairy Free';
     case GLUTEN_FREE = 'Gluten Free';
     case NUT_ALLERGY = 'Nut Allergy';
-    case SHELLFISH_ALLERGY = 'Shellfish Allergy';
 
     public function getLabel(): string
     {

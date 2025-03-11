@@ -8,12 +8,13 @@
     --color-dark-green: #053e02;
     --color-medium-green: #b7d7c2;
     --color-light-green: #e2f7e5;
+    --font-playfair: 'Playfair Display', serif;
 }
 
 html,
 body {
-    font-family: 'Playfair Display', sans-serif;
-    @apply text-dark-green bg-medium-green subpixel-antialiased;
+    font-variation-settings: 'wght' 400, 'wdth' 101.30, 'opsz' 10;
+    @apply text-dark-green bg-medium-green antialiased md:subpixel-antialiased font-playfair;
 }
 h1 {
     font-family: 'Baby Bunny Regular', serif;
@@ -34,15 +35,19 @@ h1 {
     @apply z-10;
 }
 #logo span {
-    font-family: 'Playfair Display', sans-serif;
+    @apply font-playfair;
 }
 
 h2,
 h3 {
-    font-family: 'Playfair Display', serif;
+    @apply font-playfair;
     font-weight: 500;
 }
 
 a.active {
     @apply border-b-2 border-b-gray-800;
+}
+
+::marker {
+    @apply text-dark-green;
 }

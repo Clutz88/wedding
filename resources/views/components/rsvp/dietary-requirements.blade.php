@@ -7,6 +7,7 @@
                     :id="$guest->id.'_'.$requirement->value"
                     :value="$requirement->value"
                     :text="$requirement->value"
+                    model="{{$model}}.{{$requirement->value}}"
                 />
             </li>
         @endforeach
