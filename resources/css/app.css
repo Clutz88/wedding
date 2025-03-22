@@ -9,15 +9,19 @@
     --color-medium-green: #b7d7c2;
     --color-light-green: #e2f7e5;
     --font-playfair: 'Playfair Display', serif;
+    --font-tropika: 'Tropika Island Int', serif;
+    --font-quick: 'Quick', sans-serif;
 }
 
 html,
 body {
     font-variation-settings: 'wght' 400, 'wdth' 101.30, 'opsz' 10;
-    @apply text-dark-green bg-medium-green antialiased md:subpixel-antialiased font-playfair;
+    @apply text-dark-green bg-medium-green antialiased md:subpixel-antialiased font-quick;
+    color: #2f232b;
 }
 h1 {
-    font-family: 'Baby Bunny Regular', serif;
+    font-variant-ligatures: none;
+    @apply font-tropika text-dark-green;
 }
 #logo:before {
     content: '';
@@ -27,7 +31,7 @@ h1 {
 
 #mobile-nav li:not(:last-child):after {
     content: '';
-    @apply from-dark-green absolute z-0 h-[1px] w-full rounded-full bg-gradient-to-r to-transparent;
+    @apply from-dark-green absolute z-0 h-[1px] w-full rounded-full bg-gradient-to-r to-transparent md:hidden;
 }
 
 #logo h1,
@@ -35,7 +39,7 @@ h1 {
     @apply z-10;
 }
 #logo span {
-    @apply font-playfair;
+    @apply font-quick;
 }
 
 h2,

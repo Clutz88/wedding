@@ -7,9 +7,8 @@ use App\Livewire\Rsvp;
 use App\Livewire\Venue;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Home::class);
-Route::get('order-of-service', Itinerary::class);
-Route::get('venue', Venue::class);
+Route::get('/', Home::class)->name('home');
+Route::get('order-of-service', Itinerary::class)->name('order-of-service');
+Route::get('venue', Venue::class)->name('venue');
 Route::get('rsvp/{rsvp}', Rsvp::class)->name('rsvp');
-Route::get('faq', Home::class);
-Route::get('{page:slug}', Page::class);
+Route::get('{page:slug}', Page::class)->name('page');

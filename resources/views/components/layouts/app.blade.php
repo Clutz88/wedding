@@ -10,13 +10,26 @@
         <title>{{ $title ?? '' }} - Chris & Kate Wedding</title>
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
+        {{-- <link --}}
+        {{-- rel="preload" --}}
+        {{-- href="{{ Vite::asset('resources/fonts/BabybunnyRegular.woff2') }}" --}}
+        {{-- as="font" --}}
+        {{-- type="font/woff2" --}}
+        {{-- /> --}}
         <link
             rel="preload"
-            href="{{ Vite::asset('resources/fonts/BabybunnyRegular.woff2') }}"
+            href="{{ Vite::asset('resources/fonts/tropika-island-int.woff2') }}"
             as="font"
             type="font/woff2"
+            crossorigin
         />
-        {{-- <link rel="preload" href="{{ Vite::asset('resources/fonts/PlayfairDisplay-Regular.woff2') }}" as="font" type="font/woff2"> --}}
+        <link
+            rel="preload"
+            href="{{ Vite::asset('resources/fonts/Quick.woff2') }}"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
         {{-- <link rel="preload" href="{{ Vite::asset('resources/fonts/PlayfairDisplay-Medium.ttf') }}" as="font" type="font/ttf"> --}}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +40,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="flex flex-col">
+    <body class="!mb-0 flex min-h-screen flex-col">
         <x-header />
         <div>
             {{ $slot }}
