@@ -10,3 +10,5 @@ document.addEventListener('livewire:navigated', () => {
     // Reinitialize Flowbite components
     initFlowbite();
 });
+
+import.meta.glob(['../images/**']);
