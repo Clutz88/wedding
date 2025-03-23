@@ -7,7 +7,7 @@
             <meta name="description" content="{{ $description }}" />
         @endif
 
-        <title>{{ $title ?? '' }} - Chris & Kate Wedding</title>
+        <title>{{ $title ?? '' }} {{ isset($title) ? '-' : '' }} Chris & Kate Wedding</title>
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
         {{-- <link --}}
@@ -40,10 +40,11 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="!mb-0 flex min-h-screen flex-col">
+    <body class="!m-0 flex min-h-screen flex-col">
         <x-header />
-        <div>
+        <div class="grow flex justify-items-center">
             {{ $slot }}
         </div>
+        <x-footer />
     </body>
 </html>

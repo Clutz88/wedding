@@ -12,7 +12,7 @@
     <button
         data-collapse-toggle="navbar-hamburger"
         type="button"
-        class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg p-2 text-sm md:hidden"
+        class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg p-2 m-2 text-sm md:hidden"
         aria-controls="navbar-hamburger"
         aria-expanded="false"
     >
@@ -34,7 +34,7 @@
         </svg>
     </button>
     <div
-        class="bg-medium-green absolute z-50 hidden w-full md:relative md:block md:bg-transparent"
+        class="bg-background absolute z-50 hidden w-full md:relative md:block md:bg-transparent"
         id="navbar-hamburger"
     >
         <ul
@@ -42,17 +42,16 @@
             id="mobile-nav"
         >
             <x-navigation-link href="/" :active="Request::routeIs('home')">Home</x-navigation-link>
-            <x-navigation-link href="/about-us" :active="Request::is('about-us')">About Us</x-navigation-link>
-            <x-navigation-link href="/venue" :active="Request::routeIs('venue')">Venue</x-navigation-link>
-            <x-navigation-link href="/order-of-service" :active="Request::routeIs('order-of-service')">
-                Order of Service
-            </x-navigation-link>
             <x-navigation-link
-                :href="route('rsvp', ['rsvp' => '019559f6-a374-72c5-ae21-03abb7be7cb4'])"
-                :active="Request::routeIs('rsvp')"
+                :href="route('rsvp.search')"
+                :active="Request::routeIs('rsvp') || Request::routeIs('rsvp.search')"
             >
                 RSVP
             </x-navigation-link>
+            <x-navigation-link href="/order-of-service" :active="Request::routeIs('order-of-service')">
+                Order of Service
+            </x-navigation-link>
+            <x-navigation-link href="/venue" :active="Request::routeIs('venue')">Useful Info</x-navigation-link>
         </ul>
     </div>
 </nav>

@@ -1,4 +1,5 @@
-<div class="mb-12">
-    <x-navigation />
-    <x-logo />
+<div class="mb-4">
+    @if(! Request::is('/'))
+        <x-navigation />
+    @endif
 </div>

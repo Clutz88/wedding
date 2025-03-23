@@ -11,6 +11,18 @@
     src: url(./../fonts/tropika-island-int.woff2) format('woff2');
 }
 @font-face {
+    font-family: 'Tropikal';
+    font-style: normal;
+    font-weight: 400;
+    src: url(./../fonts/tropikal-bold.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Brittany';
+    font-style: normal;
+    font-weight: 400;
+    src: url(./../fonts/BrittanySignature.woff2) format('woff2');
+}
+@font-face {
     font-family: 'Quick';
     font-style: normal;
     font-weight: 400;
