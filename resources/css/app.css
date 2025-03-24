@@ -26,7 +26,7 @@ body {
     @apply text-dark-green bg-background font-quick antialiased md:subpixel-antialiased;
     color: #2f232b;
 }
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-variant-ligatures: none;
     @apply font-tropikal text-dark-green;
 }

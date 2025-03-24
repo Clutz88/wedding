@@ -12,7 +12,7 @@
     <button
         data-collapse-toggle="navbar-hamburger"
         type="button"
-        class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg p-2 m-2 text-sm md:hidden"
+        class="m-2 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg p-2 text-sm md:hidden"
         aria-controls="navbar-hamburger"
         aria-expanded="false"
     >
@@ -33,12 +33,9 @@
             />
         </svg>
     </button>
-    <div
-        class="bg-background absolute z-50 hidden w-full md:relative md:block md:bg-transparent"
-        id="navbar-hamburger"
-    >
+    <div class="bg-background absolute z-50 hidden w-full md:relative md:block md:bg-transparent" id="navbar-hamburger">
         <ul
-            class="md:align-center mt-4 flex flex-col rounded-lg font-medium md:mx-4 md:flex-row md:justify-end"
+            class="md:align-center mt-4 flex flex-col rounded-lg font-medium md:mx-4 md:flex-row md:justify-center"
             id="mobile-nav"
         >
             <x-navigation-link href="/" :active="Request::routeIs('home')">Home</x-navigation-link>

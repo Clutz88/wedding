@@ -1,6 +1,10 @@
-<div class="flex justify-center grow before:bg-[url(../images/flower.png)] before:bg-contain before:fixed before:w-180 before:h-180 before:bg-no-repeat before:-right-118 after:fixed after:w-full after:h-full after:bg-background/65">
-    <div class=" md:bg-[url(../images/flower.png)] md:bg-contain md:fixed md:w-180 md:h-180 md:bg-no-repeat md:-left-65"></div>
-    <div class="mx-6 max-w-7xl rounded p-4 z-10 bg-background/65">
+<div
+    class="after:bg-background/65 flex grow justify-center before:fixed before:-right-118 before:h-180 before:w-180 before:bg-[url(../images/flower.avif)] before:bg-contain before:bg-no-repeat after:fixed after:h-full after:w-full"
+>
+    <div
+        class="md:fixed md:-left-65 md:h-180 md:w-180 md:bg-[url(../images/flower.avif)] md:bg-contain md:bg-no-repeat"
+    ></div>
+    <div class="bg-background/65 z-10 mx-6 max-w-7xl grow rounded p-4">
         {{ $slot }}
     </div>
 </div>
