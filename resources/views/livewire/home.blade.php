@@ -8,17 +8,11 @@
         <h1 class="mb-2 text-5xl md:text-7xl">Chris & Kate</h1>
         <span class="font-semibold">{{ \App\Facades\Wedding::date()->format('d F Y') }}</span>
         <span class="font-quick text-xs">The Croft Hotel, Darlington</span>
-        <div class="mt-8 mb-8 flex flex-col md:flex-row gap-5">
-            <x-link-button :href="route('rsvp.search')">
-                RSVP
-            </x-link-button>
-            <x-link-button :href="route('order-of-service')">
-                Order of Service
-            </x-link-button>
-            <x-link-button :href="route('venue')">
-                Useful Info
-            </x-link-button>
+        <div class="mt-8 mb-8 flex flex-col gap-5 md:flex-row">
+            <x-link-button :href="route('rsvp.search')">RSVP</x-link-button>
+            <x-link-button :href="route('order-of-service')">Order of Service</x-link-button>
+            <x-link-button :href="route('venue')">Useful Info</x-link-button>
         </div>
-        <img src="{{ Vite::asset('resources/images/flower.png') }}" class="w-56 md:w-96" alt="" />
+        <img src="{{ Vite::asset('resources/images/flower.avif') }}" class="w-56 md:w-96" alt="" />
     </div>
 </div>

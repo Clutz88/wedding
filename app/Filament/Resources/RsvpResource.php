@@ -28,6 +28,7 @@ class RsvpResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name'),
+                TextInput::make('code'),
             ]);
     }
 

@@ -35,7 +35,7 @@
     </button>
     <div class="bg-background absolute z-50 hidden w-full md:relative md:block md:bg-transparent" id="navbar-hamburger">
         <ul
-            class="md:align-center mt-4 flex flex-col rounded-lg font-medium md:mx-4 md:flex-row md:justify-center"
+            class="md:align-center md:justify-left mt-4 flex flex-col rounded-lg font-medium md:mx-4 md:flex-row"
             id="mobile-nav"
         >
             <x-navigation-link href="/" :active="Request::routeIs('home')">Home</x-navigation-link>

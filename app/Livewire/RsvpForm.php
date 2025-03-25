@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Guest;
 use App\Models\Rsvp as RsvpModel;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class RsvpForm extends Component
@@ -17,11 +18,12 @@ class RsvpForm extends Component
     public RsvpModel $rsvp;
 
     public array $attending_guests = [];
-    public array $dietary_requirements = [];
+    public Collection $dietary_requirements;
 
     public function mount(RsvpModel $rsvp): void
     {
         $this->rsvp = $rsvp;
+        $this->dietary_requirements = collect();
     }
 
     public function getGuest(string $id): Guest
@@ -43,8 +45,16 @@ class RsvpForm extends Component
     {
         $this->has_dietary_requirements = $has_dietary_requirements;
     }
+
+    public function getDietaryRequirements(string $id): string
+    {
+        return collect($this->dietary_requirements[$id] ?? [])
+            ->filter(fn ($value) => $value !== true)
+            ->implode(fn ($value) => $value, ', ');
+    }
+
     public function render()
     {
-        return $this->overview ? view('livewire.rsvp.overview') : view('livewire.rsvp.form');
+        return view('livewire.rsvp.form');
     }
 }

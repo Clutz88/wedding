@@ -15,8 +15,7 @@ class RsvpSearch extends Component
             ->replace(' ', '')
             ->lower();
 
-//        $rsvp = \App\Models\Rsvp::where('code', $code)->first();
-        $rsvp = RsvpModel::first();
+        $rsvp = RsvpModel::whereRaw('LOWER(code) LIKE ?', $code)->first();
 
         if ($rsvp) {
             return to_route('rsvp', $rsvp);
