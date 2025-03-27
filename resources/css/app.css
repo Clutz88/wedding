@@ -3,6 +3,7 @@
 
 @source "../views";
 @plugin '@tailwindcss/typography';
+@plugin '@tailwindcs/forms';
 
 @theme {
     --color-background: #f9f5f2;
