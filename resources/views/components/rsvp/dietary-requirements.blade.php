@@ -1,6 +1,6 @@
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 mt-6">
     <h3 class="text-2xl">{{ $guest->name }}</h3>
-    <ul class="grid grid-cols-2 gap-2 md:grid-cols-4">
+    <ul class="grid grid-cols-2 gap-4 md:grid-cols-4">
         @foreach (\App\Enums\DietaryRequirements::cases() as $requirement)
             <li>
                 <x-toggle

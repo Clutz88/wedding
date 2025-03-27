@@ -1,11 +1,15 @@
 <div>
     @if ($stage === \App\Enums\RsvpStage::FORM->value)
-        <form class="flex flex-col gap-4 rounded py-6">
-            <div class="flex flex-col gap-4">
-                <h2 class="mt-8 flex items-center gap-1 text-3xl">Can you attend as a day guest?</h2>
-                <div class="flex gap-4">
-                    <x-form-button :active="$attending" wire:click.prevent="setAttending(true)" text="Yes!" />
-                    <x-form-button :active="$attending === false" wire:click.prevent="setAttending(false)" text="No" />
+        <form class="flex flex-col gap-4 rounded">
+            <div class="flex flex-col gap-5 mt-8 ">
+                <h2 class="flex items-center gap-1 text-3xl">Can you attend as a day guest?</h2>
+{{--                <div class="flex flex-col items-center gap-4">--}}
+{{--                    <x-button :active="$attending" wire:click.prevent="setAttending(true)" text="Yes!" />--}}
+{{--                    <x-button :active="$attending === false" wire:click.prevent="setAttending(false)" text="No" />--}}
+{{--                </div>--}}
+                <div class="flex gap-6">
+                <x-radio-button model="attending" value="yes">Yes</x-radio-button>
+                <x-radio-button model="attending" value="no">No</x-radio-button>
                 </div>
                 @if ($attending)
                     <p>Woohoo! We can't wait to see you there! 🥳</p>
@@ -13,12 +17,11 @@
             </div>
 
             @if ($attending)
-                <div class="flex flex-col gap-4">
-                    <h2 class="mt-8 flex items-center gap-1 text-3xl">
-                        Who's Attending?
-                        <span class="text-xs">Tick all that apply</span>
+                <div class="flex flex-col">
+                    <h2 class="mt-8 mb-4 text-3xl">
+                        Who's attending?
                     </h2>
-                    <ul class="flex flex-col gap-2">
+                    <ul class="flex flex-col gap-4">
                         @foreach ($rsvp->guests as $index => $guest)
                             <li><x-toggle :id="$guest->id" model="attending_guests" :text="$guest->name" /></li>
                         @endforeach
@@ -27,23 +30,14 @@
 
                 <div class="flex flex-col gap-4">
                     @if (! empty($attending_guests))
-                        <h2 class="mt-8 flex items-center gap-1 text-3xl">Any dietary requirements in your party?</h2>
-                        <div class="flex gap-4">
-                            <x-form-button
-                                :active="$has_dietary_requirements"
-                                wire:click.prevent="setHasDietaryRequirements(true)"
-                                text="Yes"
-                            />
-                            <x-form-button
-                                :active="$has_dietary_requirements === false"
-                                wire:click.prevent="setHasDietaryRequirements(false)"
-                                text="No"
-                            />
+                        <h2 class="mt-8 flex items-center gap-1 text-3xl">Any dietary requirements?</h2>
+                        <div class="flex gap-6">
+                            <x-radio-button model="has_dietary_requirements" value="yes">Yes</x-radio-button>
+                            <x-radio-button model="has_dietary_requirements" value="no">No</x-radio-button>
                         </div>
                     @endif
 
                     @if (! empty($attending_guests) && $has_dietary_requirements)
-                        <p class="text-sm">Tell us about them</p>
                         @foreach ($rsvp->guests as $index => $guest)
                             @if (in_array($guest->id, $attending_guests))
                                 <x-rsvp.dietary-requirements
@@ -66,7 +60,7 @@
                 ></textarea>
             @endif
             @if ($attending === false || ($attending === true && $has_dietary_requirements !== null))
-                <div class="flex justify-end">
+                <div class="flex justify-end mt-8">
                     <x-button wire:click.prevent="setStage('{{\App\Enums\RsvpStage::CONFIRM->value}}')" text="Next" />
                 </div>
             @endif
