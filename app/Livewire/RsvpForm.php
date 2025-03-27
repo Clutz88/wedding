@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\RsvpStage;
 use App\Models\Guest;
 use App\Models\Rsvp as RsvpModel;
 use Illuminate\Support\Collection;
@@ -15,6 +16,8 @@ class RsvpForm extends Component
 
     public bool $overview = false;
 
+    public string $stage;
+
     public RsvpModel $rsvp;
 
     public array $attending_guests = [];
@@ -24,6 +27,12 @@ class RsvpForm extends Component
     {
         $this->rsvp = $rsvp;
         $this->dietary_requirements = collect();
+        $this->stage = RsvpStage::FORM->value;
+    }
+
+    public function setStage(RsvpStage $stage): void
+    {
+        $this->stage = $stage->value;
     }
 
     public function getGuest(string $id): Guest
@@ -51,6 +60,11 @@ class RsvpForm extends Component
         return collect($this->dietary_requirements[$id] ?? [])
             ->filter(fn ($value) => $value !== true)
             ->implode(fn ($value) => $value, ', ');
+    }
+
+    public function confirm()
+    {
+
     }
 
     public function render()

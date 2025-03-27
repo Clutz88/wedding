@@ -1,4 +1,5 @@
 import './bootstrap';
+import './confetti';
 import 'flowbite';
 
 document.addEventListener('livewire:navigating', () => {

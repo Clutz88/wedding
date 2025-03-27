@@ -1,8 +1,8 @@
 <div>
-    @if (! $overview)
+    @if ($stage === \App\Enums\RsvpStage::FORM->value)
         <form class="flex flex-col gap-4 rounded py-6">
             <div class="flex flex-col gap-4">
-                <h2 class="mt-8 flex items-center gap-1 text-3xl uppercase">Can you attend as a day guest?</h2>
+                <h2 class="mt-8 flex items-center gap-1 text-3xl">Can you attend as a day guest?</h2>
                 <div class="flex gap-4">
                     <x-form-button :active="$attending" wire:click.prevent="setAttending(true)" text="Yes!" />
                     <x-form-button :active="$attending === false" wire:click.prevent="setAttending(false)" text="No" />
@@ -14,7 +14,7 @@
 
             @if ($attending)
                 <div class="flex flex-col gap-4">
-                    <h2 class="mt-8 flex items-center gap-1 text-3xl uppercase">
+                    <h2 class="mt-8 flex items-center gap-1 text-3xl">
                         Who's Attending?
                         <span class="text-xs">Tick all that apply</span>
                     </h2>
@@ -27,9 +27,7 @@
 
                 <div class="flex flex-col gap-4">
                     @if (! empty($attending_guests))
-                        <h2 class="mt-8 flex items-center gap-1 text-3xl uppercase">
-                            Any dietary requirements in your party?
-                        </h2>
+                        <h2 class="mt-8 flex items-center gap-1 text-3xl">Any dietary requirements in your party?</h2>
                         <div class="flex gap-4">
                             <x-form-button
                                 :active="$has_dietary_requirements"
@@ -69,13 +67,15 @@
             @endif
             @if ($attending === false || ($attending === true && $has_dietary_requirements !== null))
                 <div class="flex justify-end">
-                    <x-button wire:click.prevent="setOverview(true)" text="Next" />
+                    <x-button wire:click.prevent="setStage('{{\App\Enums\RsvpStage::CONFIRM->value}}')" text="Next" />
                 </div>
             @endif
         </form>
-    @else
+    @endif
+
+    @if ($stage === \App\Enums\RsvpStage::CONFIRM->value)
         <div class="py-6">
-            <h2 class="pb-2 text-3xl uppercase">Overview</h2>
+            <h2 class="pb-2 text-3xl uppercase">Confirmation</h2>
             <div class="mb-12 flex flex-col gap-6 rounded py-4">
                 @if ($rsvp->guests->whereIn('id', $attending_guests)->isNotEmpty())
                     <div>
@@ -116,8 +116,16 @@
                 @endif
 
                 <div class="flex flex-col items-end gap-4 md:flex-row md:justify-between">
-                    <x-button wire:click.prevent="setOverview(false)" text="Back" />
-                    <x-button wire:click.prevent="confirm()" text="Confirm" />
+                    <x-button wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')" text="Back" />
+
+                    <x-button
+                        wire:click.prevent="confirm()"
+                        text="Confirm"
+                        @click="if ({{(int) $rsvp->guests->whereIn('id', $attending_guests)->isNotEmpty()}}) {
+                            jsConfetti.addConfetti();
+                            jsConfetti.addConfetti({emojis: ['🧡', '💍', '🎉', '🪩']});
+                        }"
+                    />
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
-<div class="mb-4">
-    @if(! Request::is('/'))
+@if (! Request::is('/'))
+    <div class="mb-4">
         <x-navigation />
-    @endif
-</div>
+    </div>
+@endif

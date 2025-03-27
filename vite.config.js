@@ -12,4 +12,7 @@ export default defineConfig({
         }),
         ViteImageOptimizer({ avif: { quality: 70 } }),
     ],
+    server: {
+        html: true,
+    },
 });
