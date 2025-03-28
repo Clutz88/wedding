@@ -5,14 +5,11 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RsvpResource\Pages;
 use App\Filament\Resources\RsvpResource\RelationManagers\GuestsRelationManager;
 use App\Models\Rsvp;
-use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -49,6 +46,7 @@ class RsvpResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('code'),
+                TextColumn::make('guests.name'),
                 TextColumn::make('song_request'),
                 IconColumn::make('attending')
                     ->boolean(),
@@ -59,15 +57,14 @@ class RsvpResource extends Resource
                 //
             ])
             ->headerActions([
+                //
             ])
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),
             ])
             ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                //
             ]);
     }
 

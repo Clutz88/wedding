@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\DietaryRequirements;
+use App\Filament\Exports\GuestExporter;
 use App\Filament\Resources\GuestResource\Pages;
 use App\Models\Guest;
 use Filament\Forms\Components\Checkbox;
@@ -15,7 +16,9 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -62,8 +65,12 @@ class GuestResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('gender'),
-                TextColumn::make('age_group'),
+                SelectColumn::make('gender')
+                    ->options(['male' => 'Male', 'female' => 'Female'])
+                    ->label('Gender'),
+                SelectColumn::make('age_group')
+                    ->options(['adult' => 'Adult', 'child' => 'Child'])
+                    ->label('Age Group'),
                 TextColumn::make('dietary_requirements')
                     ->searchable()
                     ->separator(),
@@ -72,14 +79,16 @@ class GuestResource extends Resource
             ->filters([
                 //
             ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(GuestExporter::class),
+            ])
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),
             ])
             ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                //
             ]);
     }
 

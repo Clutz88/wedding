@@ -16,7 +16,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class itineraryResource extends Resource
+class ItineraryResource extends Resource
 {
     protected static ?string $model = Itinerary::class;
 
