@@ -1,4 +1,10 @@
-<div class="flex items-center">
-    <input type="radio" wire:model.live="{{$model}}" value="{{$value}}" class="w-6 h-6  bg-gray-100 border-gray-300  checked:bg-dark-green">
-    <label class="ms-2">{{$slot}}</label>
-</div>
+<label class="flex items-center">
+    <input
+        type="radio"
+        id="{{ $name }}"
+        wire:model.live="{{ $model }}"
+        value="{{ $value }}"
+        class="checked:bg-dark-green h-6 w-6 border-gray-300 bg-gray-100"
+    />
+    <span class="ms-2" for="{{ $name }}">{{ $slot }}</span>
+</label>

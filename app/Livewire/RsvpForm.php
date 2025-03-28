@@ -10,13 +10,17 @@ use Livewire\Component;
 
 class RsvpForm extends Component
 {
-    public ?bool $attending = null;
+    public ?string $attending = null;
 
-    public ?bool $has_dietary_requirements = null;
+    public ?string $has_dietary_requirements = null;
 
     public bool $overview = false;
 
     public string $stage;
+
+    public ?string $message;
+
+    public ?string $song_request;
 
     public RsvpModel $rsvp;
 
@@ -26,33 +30,28 @@ class RsvpForm extends Component
     public function mount(RsvpModel $rsvp): void
     {
         $this->rsvp = $rsvp;
+        $this->attending = $rsvp->attending === null ? null : (bool) $rsvp->attending;
+        $this->has_dietary_requirements = $rsvp->dietary_requirements;
         $this->dietary_requirements = collect();
-        $this->stage = RsvpStage::FORM->value;
+        $this->stage = $rsvp->attending === null ? RsvpStage::FORM->value : RsvpStage::OVERVIEW->value;
+        $this->message = $rsvp->message;
+        $this->song_request = $rsvp->song_request;
+
+        $this->rsvp->guests->each(function (Guest $guest) {
+            if ($guest->attending) {
+                $this->attending_guests[] = $guest->id;
+            }
+            $requirements = [];
+            foreach ($guest->dietary_requirements as $requirement) {
+                $requirements[$requirement] = true;
+            }
+            $this->dietary_requirements->put($guest->id, $requirements);
+        });
     }
 
     public function setStage(RsvpStage $stage): void
     {
         $this->stage = $stage->value;
-    }
-
-    public function getGuest(string $id): Guest
-    {
-        return $this->guests->where('id', $id)->first();
-    }
-
-    public function setOverview(bool $overview): void
-    {
-        $this->overview = $overview;
-    }
-
-    public function setAttending(bool $attending): void
-    {
-        $this->attending = $attending;
-    }
-
-    public function setHasDietaryRequirements(bool $has_dietary_requirements): void
-    {
-        $this->has_dietary_requirements = $has_dietary_requirements;
     }
 
     public function getDietaryRequirements(string $id): string
@@ -64,7 +63,24 @@ class RsvpForm extends Component
 
     public function confirm()
     {
+        // Update rsvp fields
+        $this->rsvp->attending = (bool) $this->attending;
+        $this->rsvp->dietary_requirements = (bool) $this->has_dietary_requirements;
+        $this->rsvp->message = $this->message;
+        $this->rsvp->song_request = $this->song_request;
+        $this->rsvp->save();
+        // Update each guest fields
+        foreach ($this->rsvp->guests as $guest) {
+            $guest->attending = $this->attending && in_array($guest->id, $this->attending_guests);
+            if ($this->attending) {
+                $guest->dietary_requirements = collect($this->dietary_requirements[$guest->id] ?? [])
+                    ->filter(fn($value) => $value === true)
+                    ->keys();
+            }
+            $guest->save();
+        }
 
+        $this->stage = RsvpStage::OVERVIEW->value;
     }
 
     public function render()

@@ -13,6 +13,7 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -56,19 +57,12 @@ class GuestsRelationManager extends RelationManager
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('email')
-                    ->searchable()
-                    ->sortable(),
-
                 TextColumn::make('gender'),
 
                 TextColumn::make('age_group'),
 
                 TextColumn::make('dietary_requirements'),
-
-                TextColumn::make('notes'),
-
-                TextColumn::make('attending'),
+                IconColumn::make('attending')->boolean(),
             ])
             ->filters([
                 //

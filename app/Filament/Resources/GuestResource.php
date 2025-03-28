@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\DietaryRequirements;
 use App\Filament\Resources\GuestResource\Pages;
 use App\Models\Guest;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -14,8 +15,11 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -28,6 +32,8 @@ class GuestResource extends Resource
     protected static ?string $slug = 'guests';
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -46,6 +52,7 @@ class GuestResource extends Resource
                 Select::make('dietary_requirements')
                     ->multiple()
                     ->options(DietaryRequirements::class),
+                Checkbox::make('attending')->visible(fn (Guest $guest): bool => $guest->id !== null),
             ]);
     }
 
@@ -53,14 +60,14 @@ class GuestResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('gender'),
+                TextColumn::make('age_group'),
                 TextColumn::make('dietary_requirements')
+                    ->searchable()
                     ->separator(),
-                TextColumn::make('id')
-                    ->formatStateUsing(fn (string $state): HtmlString => new HtmlString(QrCode::size(100)->generate($state))),
-                //                    ->getStateUsing(fn ($record): string => str(QrCode::size(100)->generate($record->id))->ltrim('<!--?xml version="1.0" encoding="UTF-8"?-->'))
-                //                    ->html(),
+                IconColumn::make('attending')->boolean(),
             ])
             ->filters([
                 //
