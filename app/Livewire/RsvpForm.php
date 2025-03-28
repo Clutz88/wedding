@@ -18,9 +18,9 @@ class RsvpForm extends Component
 
     public string $stage;
 
-    public ?string $message;
+    public ?string $message = null;
 
-    public ?string $song_request;
+    public ?string $song_request = null;
 
     public RsvpModel $rsvp;
 
