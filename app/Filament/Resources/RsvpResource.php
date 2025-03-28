@@ -6,6 +6,7 @@ use App\Filament\Resources\RsvpResource\Pages;
 use App\Filament\Resources\RsvpResource\RelationManagers\GuestsRelationManager;
 use App\Models\Rsvp;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -35,8 +36,10 @@ class RsvpResource extends Resource
                 TextInput::make('name'),
                 TextInput::make('code'),
                 TextInput::make('song_request')->columnSpanFull(),
-                Checkbox::make('attending')->visible(fn (Rsvp $rsvp): bool => $rsvp->id !== null),
-                Checkbox::make('dietary_requirements')->visible(fn (Rsvp $rsvp): bool => $rsvp->id !== null),
+                Select::make('attending')
+                    ->options([false => 'not attending', true => 'attending']),
+                Select::make('dietary_requirements')
+                    ->options([false => 'no requirements', true => 'requirements']),
             ]);
     }
 
