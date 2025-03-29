@@ -11,7 +11,7 @@
                         data-modal-target="image-modal"
                         data-modal-toggle="image-modal"
                         @click="() => {
-                            document.getElementById('modal-image').src = '{{ asset($image->location) }}';
+                            document.getElementById('modal-image').src = '{{ asset('storage/' . $image->location) }}';
                             document.getElementById('modal-title').innerText = '{{ $image->description }}';
                         }"
                         class="h-auto max-w-full rounded-lg"
