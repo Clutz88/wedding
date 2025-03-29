@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Gallery;
 use App\Livewire\Home;
 use App\Livewire\Itinerary;
 use App\Livewire\Page;
@@ -13,4 +14,5 @@ Route::get('order-of-service', Itinerary::class)->name('order-of-service');
 Route::get('venue', Venue::class)->name('venue');
 Route::get('rsvp', RsvpSearch::class)->name('rsvp.search');
 Route::get('rsvp/{rsvp}', Rsvp::class)->name('rsvp');
+Route::get('gallery', Gallery::class)->name('gallery');
 Route::get('{page:slug}', Page::class)->name('page');
