@@ -65,14 +65,14 @@ class RsvpForm extends Component
     {
         // Update rsvp fields
         $this->rsvp->attending = (bool) $this->attending;
-        $this->rsvp->dietary_requirements = (bool) $this->has_dietary_requirements;
+        $this->rsvp->dietary_requirements = $this->rsvp->attending ? (bool) $this->has_dietary_requirements : null;
         $this->rsvp->message = $this->message;
         $this->rsvp->song_request = $this->song_request;
         $this->rsvp->save();
         // Update each guest fields
         foreach ($this->rsvp->guests as $guest) {
-            $guest->attending = $this->attending && in_array($guest->id, $this->attending_guests);
-            if ($this->attending) {
+            $guest->attending = $this->rsvp->attending && in_array($guest->id, $this->attending_guests);
+            if ($this->rsvp->attending) {
                 $guest->dietary_requirements = collect($this->dietary_requirements[$guest->id] ?? [])
                     ->filter(fn($value) => $value === true)
                     ->keys();

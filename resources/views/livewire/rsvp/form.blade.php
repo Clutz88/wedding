@@ -60,7 +60,7 @@
                         id="song_request"
                         wire:model="song_request"
                         class="focus:ring-dark-green block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5"
-                        placeholder="Lynyrd Skynyrd - Free bird"
+                        placeholder=""
                     />
                 </div>
             @elseif ($attending !== null)
