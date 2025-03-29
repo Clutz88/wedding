@@ -1,9 +1,8 @@
 <x-slot:title>Itinerary</x-slot>
 <x-section>
-    <h1 class="pb-2 text-5xl">Order of service</h1>
-    <p class="border-b-dark-green border-b border-dotted pb-8">This is what you can expect to happen on the day.</p>
+    <x-section-header title="Order of service">This is what you can expect to happen on the day.</x-section-header>
 
-    <ol class="border-dark-green relative m-4 mt-10 border-s">
+    <ol class="border-dark-green relative m-4 border-s">
         @foreach ($itineraries as $itinerary)
             <li class="ms-4 mb-10">
                 <div class="bg-dark-green absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white"></div>

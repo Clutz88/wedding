@@ -1,8 +1,7 @@
 <x-section>
-    <h1 class="pb-2 text-5xl">RSVP</h1>
-    <p class="border-b-dark-green border-b border-dotted pb-8">This is where you can let us know if you can attend.</p>
+    <x-section-header title="RSVP">This is where you can let us know if you can attend.</x-section-header>
 
-    <form class="mt-8 flex w-full flex-col items-start gap-4" wire:submit.prevent="search">
+    <form class="flex w-full flex-col items-start gap-4" wire:submit.prevent="search">
         <p>Enter your code to access your RSVP</p>
         <input
             type="text"

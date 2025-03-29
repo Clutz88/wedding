@@ -1,7 +1,7 @@
 <div>
     @if ($stage === \App\Enums\RsvpStage::FORM->value)
         <form class="flex flex-col gap-4 rounded">
-            <div class="mt-8 flex flex-col gap-5">
+            <div class="flex flex-col gap-5">
                 <h2 class="flex items-center gap-1 text-3xl">Can you attend as a day guest?</h2>
                 {{-- <div class="flex flex-col items-center gap-4"> --}}
                 {{-- <x-button :active="$attending" wire:click.prevent="setAttending(true)" text="Yes!" /> --}}
@@ -82,7 +82,7 @@
             @endif
         </form>
     @else
-        <div class="py-6">
+        <div>
             <h2 class="pb-2 text-3xl uppercase">
                 {{ $stage === \App\Enums\RsvpStage::CONFIRM->value ? 'Confirmation' : 'Overview' }}
             </h2>

@@ -1,10 +1,8 @@
 <x-slot:title>Useful Info</x-slot>
 <x-section>
-    <h1 class="pb-2 text-5xl">Useful info</h1>
-    <p class="border-b-dark-green border-b border-dotted pb-8">
-        This is where you can find out all about things nearby.
-    </p>
-    <h2 class="mt-8 flex items-center gap-1 text-3xl uppercase">
+    <x-section-header title="Useful info">This is where you can find out all about things nearby.</x-section-header>
+
+    <h2 class="flex items-center gap-1 text-3xl uppercase">
         <x-bx-map-pin class="inline w-7" />
         <span>Venue</span>
     </h2>
