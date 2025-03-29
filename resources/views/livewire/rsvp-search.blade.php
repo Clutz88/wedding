@@ -4,7 +4,11 @@
 
     <form class="mt-8 flex w-full flex-col items-start gap-4" wire:submit.prevent="search">
         <p>Enter your code to access your RSVP</p>
-        <input type="text" class="border-dark-green bg-background rounded-xl border p-2" wire:model="rsvp_code" />
+        <input
+            type="text"
+            class="border-dark-green bg-background focus:ring-dark-green rounded-xl border p-2"
+            wire:model="rsvp_code"
+        />
         <p class="text-sm text-red-800">{{ $error_message }}</p>
         <x-button type="submit" text="Submit" />
     </form>
