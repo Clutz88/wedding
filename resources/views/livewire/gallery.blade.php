@@ -15,7 +15,7 @@
                             document.getElementById('modal-title').innerText = '{{ $image->description }}';
                         }"
                         class="h-auto max-w-full rounded-lg"
-                        src="{{ asset($image->location) }}"
+                        src="{{ asset('storage/' . $image->location) }}"
                         alt=""
                     />
                 </div>
