@@ -32,6 +32,7 @@ class ImageResource extends Resource
                     ->required(),
                 FileUpload::make('location')
                     ->image()
+                    ->optimize('avif')
                     ->imageEditor()
                     ->imageEditorAspectRatios([
                         null,
