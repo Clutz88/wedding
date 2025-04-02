@@ -18,6 +18,15 @@
         just in case.
     </p>
     <h3 class="mt-6 mb-1 text-2xl">Location</h3>
+    <p class="mb-4">
+        The Croft Hotel,
+        <br />
+        Northallerton Road,
+        <br />
+        Darlington,
+        <br />
+        DL2 2ST
+    </p>
     <x-map />
     <h3 class="mt-6 mb-1 text-2xl">Parking</h3>
     <p>There is ample free parking to the front and rear of the building.</p>

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\RsvpResource\RelationManagers;
 use App\Models\Guest;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -26,23 +27,14 @@ class GuestsRelationManager extends RelationManager
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->required(),
-
-                TextInput::make('email'),
-
-                TextInput::make('gender'),
-
-                TextInput::make('age_group'),
-
-                TextInput::make('notes'),
-
-                Placeholder::make('created_at')
-                    ->label('Created Date')
-                    ->content(fn (?Guest $record): string => $record?->created_at?->diffForHumans() ?? '-'),
-
-                Placeholder::make('updated_at')
-                    ->label('Last Modified Date')
-                    ->content(fn (?Guest $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                    ->required()
+                    ->columnSpanFull(),
+                Radio::make('type')
+                    ->options(['day' => 'Day', 'evening' => 'Evening'])
+                    ->label('Type'),
+                Radio::make('age_group')
+                    ->options(['adult' => 'Adult', 'child' => 'Child'])
+                    ->label('Age Group'),
 
                 Checkbox::make('attending'),
             ]);

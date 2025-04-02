@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\GuestType;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +26,7 @@ class Guest extends Model
         return [
             'id' => 'string',
             'dietary_requirements' => 'array',
+            'type' => GuestType::class,
         ];
     }
 }

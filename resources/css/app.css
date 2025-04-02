@@ -31,6 +31,15 @@ h1, h2, h3, h4 {
     font-variant-ligatures: none;
     @apply font-tropikal text-dark-green;
 }
+h2 {
+    @apply text-3xl;
+}
+h3 {
+    @apply text-2xl;
+}
+h3 {
+    @apply text-xl;
+}
 
 #mobile-nav li:not(:last-child):after {
     content: '';

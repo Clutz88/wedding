@@ -40,15 +40,16 @@ class GuestResource extends Resource
                     ->label('Name'),
                 TextInput::make('email')
                     ->label('Email'),
-                Radio::make('gender')
-                    ->options(['male' => 'Male', 'female' => 'Female'])
-                    ->label('Gender'),
+                Radio::make('type')
+                    ->options(['day' => 'Day', 'evening' => 'Evening'])
+                    ->label('Type'),
                 Radio::make('age_group')
                     ->options(['adult' => 'Adult', 'child' => 'Child'])
                     ->label('Age Group'),
                 Select::make('dietary_requirements')
                     ->multiple()
-                    ->options(DietaryRequirements::class),
+                    ->options(DietaryRequirements::class)
+                    ->columnSpanFull(),
                 Checkbox::make('attending')->visible(fn (Guest $guest): bool => $guest->id !== null),
             ]);
     }
@@ -59,12 +60,12 @@ class GuestResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                SelectColumn::make('gender')
-                    ->options(['male' => 'Male', 'female' => 'Female'])
-                    ->label('Gender'),
                 SelectColumn::make('age_group')
                     ->options(['adult' => 'Adult', 'child' => 'Child'])
                     ->label('Age Group'),
+                SelectColumn::make('type')
+                    ->options(['day' => 'Day', 'evening' => 'Evening'])
+                    ->label('Type'),
                 TextColumn::make('dietary_requirements')
                     ->searchable()
                     ->separator(),

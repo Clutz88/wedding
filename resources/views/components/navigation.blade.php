@@ -33,22 +33,28 @@
             />
         </svg>
     </button>
-    <div class="bg-background absolute z-50 hidden w-full md:relative md:block md:bg-transparent" id="navbar-hamburger">
+    <div
+        class="bg-background absolute z-50 hidden w-full md:relative md:z-0 md:block md:bg-transparent"
+        id="navbar-hamburger"
+    >
         <ul
             class="md:align-center md:justify-left mt-4 flex flex-col rounded-lg font-medium md:mx-4 md:flex-row"
             id="mobile-nav"
         >
-            <x-navigation-link href="/" :active="Request::routeIs('home')">Home</x-navigation-link>
+            <x-navigation-link :href="route('home')" :active="Request::routeIs('home')">Home</x-navigation-link>
             <x-navigation-link
                 :href="route('rsvp.search')"
                 :active="Request::routeIs('rsvp') || Request::routeIs('rsvp.search')"
             >
                 RSVP
             </x-navigation-link>
-            <x-navigation-link href="/order-of-service" :active="Request::routeIs('order-of-service')">
+            <x-navigation-link :href="route('order-of-service')" :active="Request::routeIs('order-of-service')">
                 Order of Service
             </x-navigation-link>
-            <x-navigation-link href="/venue" :active="Request::routeIs('venue')">Useful Info</x-navigation-link>
+            <x-navigation-link :href="route('venue')" :active="Request::routeIs('venue')">
+                Useful Info
+            </x-navigation-link>
+            <x-navigation-link :href="route('menu')" :active="Request::routeIs('menu')">Menu</x-navigation-link>
         </ul>
     </div>
 </nav>

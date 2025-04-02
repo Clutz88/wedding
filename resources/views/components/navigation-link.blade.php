@@ -2,7 +2,7 @@
     <a
         href="{{ $href }}"
         wire:navigate
-        class="{{ $active ? 'bg-peach' : '' }} block px-3 py-2 md:inline-block md:rounded-xl"
+        class="{{ $active ? 'border-peach border-b-3' : '' }} block px-3 py-2 md:inline-block"
     >
         {{ $slot }}
     </a>
