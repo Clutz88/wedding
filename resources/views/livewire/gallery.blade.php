@@ -160,7 +160,7 @@
             <!-- Modal header -->
             {{-- <div class="flex items-center justify-between rounded-t border-b border-gray-200 p-4 md:p-5"> --}}
             <h3
-                class="!font-quick absolute bottom-0 z-60 w-full bg-gray-900/50 py-2 text-center text-xl font-semibold !text-white"
+                class="!font-quick absolute bottom-0 z-60 w-full bg-gradient-to-b from-transparent to-black py-2 text-center text-xl font-semibold !text-white"
                 id="modal-title"
             ></h3>
             <button
