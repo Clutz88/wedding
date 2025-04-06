@@ -24,6 +24,7 @@ class RsvpResource extends Resource
     protected static ?string $slug = 'rsvps';
 
     protected static ?string $navigationIcon = 'heroicon-o-document-check';
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -51,7 +52,7 @@ class RsvpResource extends Resource
                 IconColumn::make('attending')
                     ->boolean(),
                 IconColumn::make('dietary_requirements')
-                    ->boolean()
+                    ->boolean(),
             ])
             ->filters([
                 //

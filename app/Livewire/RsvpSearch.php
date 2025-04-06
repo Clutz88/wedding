@@ -19,8 +19,9 @@ class RsvpSearch extends Component
 
         $rsvp = RsvpModel::whereRaw('LOWER(code) LIKE ?', $code)->first();
 
-        if (!$rsvp) {
+        if (! $rsvp) {
             $this->error_message = 'RSVP not found';
+
             return false;
         }
 

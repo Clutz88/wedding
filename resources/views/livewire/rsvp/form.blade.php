@@ -89,7 +89,10 @@
             <h2 class="pb-2 text-3xl uppercase">
                 {{ $stage === \App\Enums\RsvpStage::CONFIRM->value ? 'Confirmation' : 'Thank you' }}
             </h2>
-            <p>Thanks for letting us know who will be attending. If things change you can update your information here until 1st August 2025.</p>
+            <p>
+                Thanks for letting us know who will be attending. If things change you can update your information here
+                until 1st August 2025.
+            </p>
             <div class="mb-12 flex flex-col gap-6 rounded py-4">
                 @if ($attending)
                     @if ($rsvp->guests->whereIn('id', $attending_guests)->isNotEmpty())
@@ -172,7 +175,10 @@
                             }"
                         />
                     @else
-                        <x-button wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')" text="Update RSVP" />
+                        <x-button
+                            wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')"
+                            text="Update RSVP"
+                        />
                         <x-link-button :href="route('venue')">Useful info</x-link-button>
                         <x-link-button :href="route('home')">Home</x-link-button>
                     @endif
