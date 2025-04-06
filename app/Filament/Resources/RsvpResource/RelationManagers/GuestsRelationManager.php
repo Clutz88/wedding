@@ -2,9 +2,7 @@
 
 namespace App\Filament\Resources\RsvpResource\RelationManagers;
 
-use App\Models\Guest;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;

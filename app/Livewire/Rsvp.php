@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Guest;
 use App\Models\Rsvp as RsvpModel;
 use Livewire\Component;
 

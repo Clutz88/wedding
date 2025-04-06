@@ -156,7 +156,7 @@
         class="fixed top-0 right-0 left-0 z-50 hidden min-h-screen min-w-screen items-center justify-center overflow-x-hidden overflow-y-auto before:fixed before:h-screen before:w-screen before:bg-black/70 md:inset-0"
     >
         <!-- Modal content -->
-        <div class="relative flex h-fit w-fit flex-col rounded-lg shadow-sm">
+        <div class="relative flex h-fit w-fit flex-col shadow-sm">
             <!-- Modal header -->
             {{-- <div class="flex items-center justify-between rounded-t border-b border-gray-200 p-4 md:p-5"> --}}
             <h3
@@ -188,7 +188,7 @@
             {{-- </div> --}}
             <!-- Modal body -->
             <div class="mx-auto flex grow items-center">
-                <img class="z-50 h-auto max-h-screen max-w-screen rounded-lg" src="" id="modal-image" alt="" />
+                <img class="z-50 h-auto max-h-screen max-w-screen" src="" id="modal-image" alt="" />
             </div>
         </div>
     </div>

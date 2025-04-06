@@ -27,6 +27,7 @@ class RsvpForm extends Component
     public RsvpModel $rsvp;
 
     public array $attending_guests = [];
+
     public Collection $dietary_requirements;
 
     public function mount(RsvpModel $rsvp): void
@@ -38,7 +39,7 @@ class RsvpForm extends Component
         $this->stage = $rsvp->attending === null ? RsvpStage::FORM->value : RsvpStage::OVERVIEW->value;
         $this->message = $rsvp->message;
         $this->song_request = $rsvp->song_request;
-        $this->type = $rsvp->guests->first()->type->value;
+        $this->type = $rsvp->guests->first()?->type?->value ?? 'day';
 
         $this->rsvp->guests->each(function (Guest $guest) {
             if ($guest->attending) {
@@ -77,7 +78,7 @@ class RsvpForm extends Component
             $guest->attending = $this->rsvp->attending && in_array($guest->id, $this->attending_guests);
             if ($this->rsvp->attending) {
                 $guest->dietary_requirements = collect($this->dietary_requirements[$guest->id] ?? [])
-                    ->filter(fn($value) => $value === true)
+                    ->filter(fn ($value) => $value === true)
                     ->keys();
             }
             $guest->save();
