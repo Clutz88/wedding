@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e7f34f2222151fd0fa39953627bafb7",
+    "content-hash": "73c851070fb0a905b9c3b104e0e7afcb",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -4394,16 +4394,16 @@
         },
         {
             "name": "owenvoke/blade-fontawesome",
-            "version": "v2.9.0",
+            "version": "v2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owenvoke/blade-fontawesome.git",
-                "reference": "923f40567296e58a6a3452c525ac1e095ece9772"
+                "reference": "94dcd0c78f43f8234b0d9c76c903ecd288b8b0d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owenvoke/blade-fontawesome/zipball/923f40567296e58a6a3452c525ac1e095ece9772",
-                "reference": "923f40567296e58a6a3452c525ac1e095ece9772",
+                "url": "https://api.github.com/repos/owenvoke/blade-fontawesome/zipball/94dcd0c78f43f8234b0d9c76c903ecd288b8b0d1",
+                "reference": "94dcd0c78f43f8234b0d9c76c903ecd288b8b0d1",
                 "shasum": ""
             },
             "require": {
@@ -4438,7 +4438,7 @@
             "description": "A package to easily make use of Font Awesome in your Laravel Blade views",
             "support": {
                 "issues": "https://github.com/owenvoke/blade-fontawesome/issues",
-                "source": "https://github.com/owenvoke/blade-fontawesome/tree/v2.9.0"
+                "source": "https://github.com/owenvoke/blade-fontawesome/tree/v2.9.1"
             },
             "funding": [
                 {
@@ -4450,7 +4450,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-17T10:20:16+00:00"
+            "time": "2025-03-28T16:03:42+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -11727,7 +11727,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2"
+        "php": "^8.4"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
