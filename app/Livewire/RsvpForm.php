@@ -38,7 +38,7 @@ class RsvpForm extends Component
         $this->stage = $rsvp->attending === null ? RsvpStage::FORM->value : RsvpStage::OVERVIEW->value;
         $this->message = $rsvp->message;
         $this->song_request = $rsvp->song_request;
-        $this->type = $rsvp->guests->first()->type->value;
+        $this->type = $rsvp->guests->first()?->type?->value ?? 'day';
 
         $this->rsvp->guests->each(function (Guest $guest) {
             if ($guest->attending) {

@@ -15,6 +15,7 @@
         "laravel/framework": "^12.3.0",
         "laravel/tinker": "^2.10.1",
         "mallardduck/blade-boxicons": "^2.4",
+        "mallardduck/blade-lucide-icons": "^1.23",
         "owenvoke/blade-fontawesome": "^2.9",
         "scify/laravel-cookie-guard": "^4.0.1",
         "simplesoftwareio/simple-qrcode": "^4.2",

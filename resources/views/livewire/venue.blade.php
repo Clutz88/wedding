@@ -2,7 +2,7 @@
 <x-section>
     <x-section-header title="Useful info">This is where you can find out all about things nearby.</x-section-header>
 
-    <h2 class="flex items-center gap-1 text-3xl uppercase">
+    <h2 class="flex items-center gap-2 text-3xl uppercase">
         <x-bx-map-pin class="inline w-7" />
         <span>Venue</span>
     </h2>
@@ -31,7 +31,7 @@
     <h3 class="mt-6 mb-1 text-2xl">Parking</h3>
     <p>There is ample free parking to the front and rear of the building.</p>
 
-    <h2 class="mt-14 flex items-center gap-1 text-3xl uppercase" id="hotels-nearby">
+    <h2 class="mt-14 flex items-center gap-2 text-3xl uppercase" id="hotels-nearby">
         <x-bx-hotel class="inline w-7" />
         <span>Hotels</span>
     </h2>
@@ -92,7 +92,7 @@
         </li>
     </ul>
 
-    <h2 class="mt-14 flex items-center gap-1 text-3xl uppercase">
+    <h2 class="mt-14 flex items-center gap-2 text-3xl uppercase">
         <x-bx-taxi class="inline w-7" />
         <span>Taxis</span>
     </h2>
