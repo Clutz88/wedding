@@ -5,6 +5,8 @@
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/forms';
 
+@source inline('inline w-7')
+
 @theme {
     --color-background: #f9f5f2;
     --color-dark-green: #186031;
