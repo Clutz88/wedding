@@ -16,6 +16,6 @@ class Rsvp extends Component
 
     public function render()
     {
-        return view('livewire.rsvp');
+        return view('livewire.rsvp')->title('RSVP');
     }
 }

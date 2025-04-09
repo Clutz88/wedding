@@ -32,17 +32,19 @@ h2,
 h3,
 h4 {
     font-variant-ligatures: none;
+    font-weight: 400 !important;
     @apply font-tropikal text-dark-green;
 }
 h2 {
-    @apply text-3xl;
+    @apply !text-3xl mt-8 mb-4;
 }
 h3 {
-    @apply text-2xl;
+    @apply !text-2xl mt-6;
 }
 h4 {
-    @apply text-xl;
+    @apply !text-xl;
 }
+p { @apply mb-2;}
 
 #mobile-nav li:not(:last-child):after {
     content: '';

@@ -12,7 +12,6 @@ class Page extends Component
     public function mount(PageModel $page)
     {
         $this->page = $page;
-        $this->page->load('seo');
     }
 
     public function render()

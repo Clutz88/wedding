@@ -6,10 +6,6 @@
                     Can you attend as a{{ $type === \App\Enums\GuestType::EVENING->value ? 'n' : '' }} {{ $type }}
                     guest?
                 </h2>
-                {{-- <div class="flex flex-col items-center gap-4"> --}}
-                {{-- <x-button :active="$attending" wire:click.prevent="setAttending(true)" text="Yes!" /> --}}
-                {{-- <x-button :active="$attending === false" wire:click.prevent="setAttending(false)" text="No" /> --}}
-                {{-- </div> --}}
                 <div class="flex gap-6">
                     <x-radio-button model="attending" :value="true" name="yes_attending">Yes</x-radio-button>
                     <x-radio-button model="attending" :value="false" name="no_attending">No</x-radio-button>
@@ -89,31 +85,35 @@
             <h2 class="pb-2 text-3xl uppercase">
                 {{ $stage === \App\Enums\RsvpStage::CONFIRM->value ? 'Confirmation' : 'Thank you' }}
             </h2>
-            <p>
-                Thanks for letting us know who will be attending. If things change you can update your information here
-                until 1st August 2025.
-            </p>
+            @if ($stage === \App\Enums\RsvpStage::OVERVIEW->value)
+                <p>
+                    Thanks for letting us know who will be attending. If things change you can update your information
+                    here until 1st August 2025.
+                </p>
+            @endif
+
             <div class="mb-12 flex flex-col gap-6 rounded py-4">
                 @if ($attending)
                     @if ($rsvp->guests->whereIn('id', $attending_guests)->isNotEmpty())
                         <div>
                             <h3 class="mb-2 text-2xl">Attending</h3>
-                            <ul class="flex flex-col gap-2">
+                            <ul class="flex flex-col gap-6">
                                 @foreach ($rsvp->guests->whereIn('id', $attending_guests) as $guest)
-                                    <li class="flex flex-col">
-                                        <h4 class="text-xl">{{ $guest->name }}</h4>
+                                    <li>
+                                        <p class="block w-fit grow">
+                                            {{ $guest->name }} -
+                                            @if ($has_dietary_requirements)
+                                                @php
+                                                    $requirements = collect($dietary_requirements[$guest->id] ?? [])
+                                                        ->filter(fn ($value) => $value == true)
+                                                        ->implode(fn ($value, $index) => $index, ', ');
+                                                @endphp
 
-                                        @if ($has_dietary_requirements)
-                                            @php
-                                                $requirements = collect($dietary_requirements[$guest->id] ?? [])
-                                                    ->filter(fn ($value) => $value == true)
-                                                    ->implode(fn ($value, $index) => $index, ', ');
-                                            @endphp
-
-                                            <span>
-                                                {{ $requirements ?: 'None' }}
-                                            </span>
-                                        @endif
+                                                <span>
+                                                    {{ $requirements ?: 'None' }}
+                                                </span>
+                                            @endif
+                                        </p>
                                     </li>
                                 @endforeach
                             </ul>
@@ -179,7 +179,7 @@
                             wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')"
                             text="Update RSVP"
                         />
-                        <x-link-button :href="route('venue')">Useful info</x-link-button>
+                        <x-link-button :href="route('page', ['page' => 'useful-info'])">Useful info</x-link-button>
                         <x-link-button :href="route('home')">Home</x-link-button>
                     @endif
                 </div>

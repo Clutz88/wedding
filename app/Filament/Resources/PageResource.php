@@ -5,9 +5,11 @@ namespace App\Filament\Resources;
 use App\Enums\PageStatus;
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -37,7 +39,11 @@ class PageResource extends Resource
             ->schema([
                 TextInput::make('title'),
                 TextInput::make('slug'),
-                RichEditor::make('html')
+                Textarea::make('subtitle')
+                    ->rows(3)
+                    ->columnSpanFull(),
+                Textarea::make('html')
+                    ->rows(10)
                     ->columnSpanFull(),
                 Select::make('status')
                     ->options(PageStatus::class),

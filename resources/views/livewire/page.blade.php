@@ -1,6 +1,7 @@
 <x-slot:description>{{ $page->seo->description }}</x-slot>
 <x-section>
-    <article class="prose max-w-full">
-        {!! $page->html !!}
-    </article>
+    <x-section-header :title="$page->title">{{ $page->subtitle }}</x-section-header>
+    <div>
+        {!! Blade::render($page->html) !!}
+    </div>
 </x-section>

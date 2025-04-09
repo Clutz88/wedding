@@ -21,7 +21,11 @@ class ImageResource extends Resource
 
     protected static ?string $slug = 'images';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $label = 'Gallery';
+
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
+
+    protected static ?string $navigationGroup = 'Manage';
 
     public static function form(Form $form): Form
     {

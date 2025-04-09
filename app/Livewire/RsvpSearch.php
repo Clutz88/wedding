@@ -30,6 +30,6 @@ class RsvpSearch extends Component
 
     public function render()
     {
-        return view('livewire.rsvp-search');
+        return view('livewire.rsvp-search')->title('RSVP');
     }
 }

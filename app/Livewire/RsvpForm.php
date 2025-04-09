@@ -89,6 +89,6 @@ class RsvpForm extends Component
 
     public function render()
     {
-        return view('livewire.rsvp.form');
+        return view('livewire.rsvp.form')->title('RSVP');
     }
 }

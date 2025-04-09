@@ -22,7 +22,11 @@ class ItineraryResource extends Resource
 
     protected static ?string $slug = 'itineraries';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $label = 'Order of service';
+
+    protected static ?string $navigationIcon = 'heroicon-o-queue-list';
+
+    protected static ?string $navigationGroup = 'Manage';
 
     public static function form(Form $form): Form
     {

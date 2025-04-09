@@ -14,8 +14,8 @@
                 <x-link-button :href="route('order-of-service')">Order of Service</x-link-button>
             </div>
             <div class="flex flex-col gap-5 md:flex-row">
-                <x-link-button :href="route('venue')">Useful Info</x-link-button>
-                <x-link-button :href="route('menu')">Menu</x-link-button>
+                <x-link-button :href="route('page', ['page' => 'useful-info'])">Useful Info</x-link-button>
+                <x-link-button :href="route('page', ['page' => 'menu'])">Menu</x-link-button>
             </div>
         </div>
         <img src="{{ Vite::asset('resources/images/flower-bg.avif') }}" class="mt-2 w-56 md:w-96" alt="" />

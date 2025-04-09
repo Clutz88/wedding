@@ -1,13 +1,3 @@
-{{-- <div class="absolute top-0 w-screen"> --}}
-{{-- <ul class="flex gap-4 my-2 w-fit mx-auto"> --}}
-{{-- <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}" wire:navigate>Home</a></li> --}}
-{{-- <li><a href="/about-us" class="{{ Request::is('about-us') ? 'active' : '' }}" wire:navigate>About Us</a></li> --}}
-{{-- <li><a href="/venue" class="{{ Request::is('venue') ? 'active' : '' }}" wire:navigate>Venue</a></li> --}}
-{{-- <li><a href="/schedule" class="{{ Request::is('schedule') ? 'active' : '' }}" wire:navigate>Schedule</a></li> --}}
-{{-- <li><a href="/rsvp" class="{{ Request::is('rsvp') ? 'active' : '' }}" wire:navigate>RSVP</a></li> --}}
-{{-- <li><a href="/faq" class="{{ Request::is('faq') ? 'active' : '' }}" wire:navigate>FAQ</a></li> --}}
-{{-- </ul> --}}
-{{-- </div> --}}
 <nav>
     <button
         data-collapse-toggle="navbar-hamburger"
@@ -41,20 +31,28 @@
             class="md:align-center md:justify-left mt-4 flex flex-col rounded-lg font-medium md:mx-4 md:flex-row"
             id="mobile-nav"
         >
-            <x-navigation-link :href="route('home')" :active="Request::routeIs('home')">Home</x-navigation-link>
+            <x-navigation-link :href="route('home')" :active="Request::is('home')">Home</x-navigation-link>
             <x-navigation-link
                 :href="route('rsvp.search')"
-                :active="Request::routeIs('rsvp') || Request::routeIs('rsvp.search')"
+                :active="Request::is('rsvp') || Request::is('rsvp.search')"
             >
                 RSVP
             </x-navigation-link>
-            <x-navigation-link :href="route('order-of-service')" :active="Request::routeIs('order-of-service')">
+            <x-navigation-link :href="route('order-of-service')" :active="Request::is('order-of-service')">
                 Order of Service
             </x-navigation-link>
-            <x-navigation-link :href="route('venue')" :active="Request::routeIs('venue')">
+            <x-navigation-link
+                :href="route('page', ['page' => 'useful-info'])"
+                :active="Request::is('page', ['page' => 'useful-info'])"
+            >
                 Useful Info
             </x-navigation-link>
-            <x-navigation-link :href="route('menu')" :active="Request::routeIs('menu')">Menu</x-navigation-link>
+            <x-navigation-link
+                :href="route('page', ['page' => 'menu'])"
+                :active="Request::is('page', ['page' => 'menu'])"
+            >
+                Menu
+            </x-navigation-link>
         </ul>
     </div>
 </nav>

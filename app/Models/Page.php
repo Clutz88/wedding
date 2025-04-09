@@ -16,4 +16,9 @@ class Page extends Model
     {
         return $this->hasOne(PageSeo::class, 'page_id');
     }
+
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->with('seo')->where($field, $value)->firstOrFail();
+    }
 }

@@ -10,6 +10,7 @@ class Itinerary extends Component
     {
         return view('livewire.itinerary', [
             'itineraries' => \App\Models\Itinerary::all(),
-        ]);
+        ])
+            ->title('Order of service');
     }
 }
