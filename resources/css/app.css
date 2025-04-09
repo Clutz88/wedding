@@ -5,8 +5,6 @@
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/forms';
 
-@source inline('inline w-7')
-
 @theme {
     --color-background: #f9f5f2;
     --color-dark-green: #186031;
@@ -40,6 +38,15 @@ h4 {
 h2 {
     @apply !text-3xl mt-8 mb-4;
 }
+
+h2:has(svg) {
+    @apply flex items-center gap-2;
+}
+
+h2 svg {
+    @apply inline w-7;
+}
+
 h3 {
     @apply !text-2xl mt-6;
 }
