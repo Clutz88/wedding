@@ -1,7 +1,7 @@
 <div>
     @if ($stage === \App\Enums\RsvpStage::FORM->value)
-        <form class="flex flex-col gap-4 rounded">
-            <div class="flex flex-col gap-5">
+        <form class="flex flex-col rounded -mt-8">
+            <div class="flex flex-col">
                 <h2 class="flex items-center gap-1 text-3xl">
                     Can you attend as a{{ $type === \App\Enums\GuestType::EVENING->value ? 'n' : '' }} {{ $type }}
                     guest?
@@ -11,24 +11,24 @@
                     <x-radio-button model="attending" :value="false" name="no_attending">No</x-radio-button>
                 </div>
                 @if ($attending)
-                    <p>Woohoo! We can't wait to see you there! 🥳</p>
+                    <p class="mt-4">Woohoo! We can't wait to see you there! 🥳</p>
                 @endif
             </div>
 
             @if ($attending)
                 <div class="flex flex-col">
-                    <h2 class="mt-8 mb-4 text-3xl">Who's attending?</h2>
-                    <ul class="flex flex-col gap-4">
+                    <h2>Who's attending?</h2>
+                    <ul class="inline-flex flex-col gap-5 mb-2">
                         @foreach ($rsvp->guests as $index => $guest)
-                            <li><x-toggle :id="$guest->id" model="attending_guests" :text="$guest->name" /></li>
+                            <li class="inline-flex"><x-toggle :id="$guest->id" model="attending_guests" :text="$guest->name" /></li>
                         @endforeach
                     </ul>
                 </div>
 
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col mb-2">
                     @if (! empty($attending_guests))
-                        <h2 class="mt-8 flex items-center gap-1 text-3xl">Any dietary requirements?</h2>
-                        <div class="flex gap-6">
+                        <h2>Any dietary requirements or allergies?</h2>
+                        <div class="flex gap-6 mb-2">
                             <x-radio-button model="has_dietary_requirements" :value="true" name="yes_dietary">
                                 Yes
                             </x-radio-button>
@@ -49,122 +49,111 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="flex flex-col gap-4">
-                    <h2 class="mt-8 flex items-center gap-1 text-3xl">Song request</h2>
-                    <label for="song_request" class="mb-2 block">
-                        Add a song here to request it get played in the evening
-                    </label>
+                <div class="flex flex-col mb-2">
+                    <h2>Song request</h2>
                     <input
                         type="text"
                         id="song_request"
                         wire:model="song_request"
                         class="focus:ring-dark-green block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5"
-                        placeholder=""
+                        placeholder="Your favourite song..."
                     />
                 </div>
             @elseif ($attending !== null)
-                <label for="message" class="mb-2">
-                    We're sorry you can't make it, use the box below to leave a message.
-                </label>
+                <h3>Leave a message for the Bride & Groom</h3>
                 <textarea
                     id="message"
                     rows="4"
                     wire:model="message"
-                    class="placeholder-dark-green border-dark-green focus:ring-dark-green block w-full rounded-lg border bg-white p-2.5 text-sm"
-                    placeholder="Write your thoughts here..."
+                    class=" border-dark-green focus:ring-dark-green block w-full rounded-lg border bg-white p-2.5"
+                    placeholder="Start your message..."
                 ></textarea>
             @endif
             @if (($attending !== null && ! $attending) || ($attending && $has_dietary_requirements !== null))
-                <div class="mt-8 flex justify-end">
-                    <x-button wire:click.prevent="setStage('{{\App\Enums\RsvpStage::CONFIRM->value}}')" text="Next" />
+                <div class="mt-8">
+                    <x-button
+                        class="w-full md:w-52"
+                        wire:click.prevent="setStage('{{\App\Enums\RsvpStage::CONFIRM->value}}')"
+                        text="Next"
+                    />
                 </div>
             @endif
         </form>
     @else
         <div>
-            <h2 class="pb-2 text-3xl uppercase">
-                {{ $stage === \App\Enums\RsvpStage::CONFIRM->value ? 'Confirmation' : 'Thank you' }}
+            <h2 class="pb-2">
+                @if($stage === \App\Enums\RsvpStage::CONFIRM->value)
+                    Review your details
+                @elseif($attending)
+                    Thank You!
+                @else
+                    Sorry you can't attend
+                @endif
             </h2>
             @if ($stage === \App\Enums\RsvpStage::OVERVIEW->value)
                 <p>
-                    Thanks for letting us know who will be attending. If things change you can update your information
-                    here until 1st August 2025.
+                    @if($attending)
+                        Thanks for letting us know who will be attending.
+                    @endif
+                    If things change you can update your information
+                    here until 1st September 2025.
                 </p>
             @endif
 
-            <div class="mb-12 flex flex-col gap-6 rounded py-4">
+            <div class="mb-12">
                 @if ($attending)
                     @if ($rsvp->guests->whereIn('id', $attending_guests)->isNotEmpty())
-                        <div>
-                            <h3 class="mb-2 text-2xl">Attending</h3>
-                            <ul class="flex flex-col gap-6">
-                                @foreach ($rsvp->guests->whereIn('id', $attending_guests) as $guest)
-                                    <li>
-                                        <p class="block w-fit grow">
-                                            {{ $guest->name }} -
-                                            @if ($has_dietary_requirements)
-                                                @php
-                                                    $requirements = collect($dietary_requirements[$guest->id] ?? [])
-                                                        ->filter(fn ($value) => $value == true)
-                                                        ->implode(fn ($value, $index) => $index, ', ');
-                                                @endphp
-
-                                                <span>
-                                                    {{ $requirements ?: 'None' }}
-                                                </span>
-                                            @endif
-                                        </p>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    @if ($rsvp->guests->whereNotIn('id', $attending_guests)->isNotEmpty())
-                        <div>
-                            <h3 class="mb-2 text-xl">Not Attending</h3>
-                            <ul class="flex flex-col gap-2">
-                                @foreach ($rsvp->guests->whereNotIn('id', $attending_guests) as $guest)
-                                    <li class="flex flex-col">
-                                        <h4 class="text-lg">{{ $guest->name }}</h4>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    @if ($song_request)
-                        <div>
-                            <h3 class="mb-2 text-2xl">Song request</h3>
-                            <span>{{ $song_request }}</span>
-                        </div>
-                    @endif
-                @else
-                    {{ $message }}
-                    <div>
-                        <h3 class="mb-2 text-xl">Not Attending</h3>
+                        <h3 class="mb-2">Attending</h3>
                         <ul class="flex flex-col gap-2">
-                            @foreach ($rsvp->guests as $guest)
-                                <li class="flex flex-col">
-                                    <h4 class="text-lg">{{ $guest->name }}</h4>
+                            @foreach ($rsvp->guests->whereIn('id', $attending_guests) as $guest)
+                                <li>
+                                    <p class="block w-fit grow">
+                                        {{ $guest->name }} -
+                                        @if ($has_dietary_requirements)
+                                            @php
+                                                $requirements = collect($dietary_requirements[$guest->id] ?? [])
+                                                    ->filter(fn ($value) => $value == true)
+                                                    ->implode(fn ($value, $index) => $index, ', ');
+                                            @endphp
+
+                                            <span>
+                                                {{ $requirements ?: 'None' }}
+                                            </span>
+                                        @endif
+                                    </p>
                                 </li>
                             @endforeach
                         </ul>
-                    </div>
+                    @endif
+
+                    @if ($rsvp->guests->whereNotIn('id', $attending_guests)->isNotEmpty())
+                        <h3 class="mb-2 text-xl">Not Attending</h3>
+                        <ul class="flex flex-col gap-2">
+                            @foreach ($rsvp->guests->whereNotIn('id', $attending_guests) as $guest)
+                                <li class="flex flex-col">
+                                    <p class="block w-fit grow">{{ $guest->name }}</p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+
+                    @if ($song_request)
+                        <h3 class="mb-2 text-2xl">Song request</h3>
+                        <span>{{ $song_request }}</span>
+                    @endif
+                @else
+                    <h3 class="mb-2 text-xl">Not Attending</h3>
+                    <ul class="flex flex-col gap-2">
+                        @foreach ($rsvp->guests as $guest)
+                            <li class="flex flex-col">
+                                <p class="block w-fit grow">{{ $guest->name }}</p>
+                            </li>
+                        @endforeach
+                    </ul>
                 @endif
 
-                <div class="flex flex-col items-end gap-4 md:flex-row md:justify-between">
+                <div class="flex flex-col gap-4 mt-8">
                     @if ($stage === \App\Enums\RsvpStage::CONFIRM->value)
-                        <x-button
-                            class="w-full border-none bg-transparent text-left hover:underline hover:shadow-none active:shadow-none md:w-fit"
-                            wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')"
-                        >
-                            <span class="flex gap-2">
-                                <x-bx-arrow-back class="w-5" />
-                                <span>Back</span>
-                            </span>
-                        </x-button>
-
                         <x-button
                             wire:click.prevent="confirm()"
                             text="Confirm"
@@ -174,13 +163,24 @@
                                 jsConfetti.addConfetti({emojis: ['🧡', '💍', '🎉', '🪩']});
                             }"
                         />
+                        <x-button
+                            class="w-full border-none bg-transparent text-left hover:underline hover:shadow-none active:shadow-none md:w-fit"
+                            wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')"
+                        >
+                            <span class="flex gap-2">
+                                <x-bx-arrow-back class="w-5" />
+                                <span>Back</span>
+                            </span>
+                        </x-button>
                     @else
                         <x-button
+                            class="w-full md:w-52"
                             wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')"
                             text="Update RSVP"
                         />
-                        <x-link-button :href="route('page', ['page' => 'useful-info'])">Useful info</x-link-button>
-                        <x-link-button :href="route('home')">Home</x-link-button>
+                        <h2>Want to learn more about the day?</h2>
+                    <p>From food to order of service, we've got it covered!</p>
+                    <x-link-button :href="route('home')" class="w-full md:w-52">Visit our homepage</x-link-button>
                     @endif
                 </div>
             </div>

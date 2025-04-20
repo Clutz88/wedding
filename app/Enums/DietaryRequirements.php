@@ -12,6 +12,7 @@ enum DietaryRequirements: string implements HasLabel
     case DAIRY_FREE = 'Dairy Free';
     case GLUTEN_FREE = 'Gluten Free';
     case NUT_ALLERGY = 'Nut Allergy';
+    case OTHER = 'Other';
 
     public function getLabel(): string
     {
