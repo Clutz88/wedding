@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use function Pest\Laravel\call;
 
 class Page extends Model
 {
@@ -19,6 +20,10 @@ class Page extends Model
 
     public function resolveRouteBinding($value, $field = null)
     {
-        return $this->with('seo')->where($field, $value)->firstOrFail();
+        return \Cache::remember(
+            key: "Page.$value.$field",
+            ttl: 500,
+            callback: fn () => $this->with('seo')->where($field, $value)->firstOrFail()
+        );
     }
 }
