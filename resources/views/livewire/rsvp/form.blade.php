@@ -1,6 +1,6 @@
 <div>
     @if ($stage === \App\Enums\RsvpStage::FORM->value)
-        <form class="flex flex-col rounded -mt-8">
+        <form class="-mt-8 flex flex-col rounded">
             <div class="flex flex-col">
                 <h2 class="flex items-center gap-1 text-3xl">
                     Can you attend as a{{ $type === \App\Enums\GuestType::EVENING->value ? 'n' : '' }} {{ $type }}
@@ -18,17 +18,19 @@
             @if ($attending)
                 <div class="flex flex-col">
                     <h2>Who's attending?</h2>
-                    <ul class="inline-flex flex-col gap-5 mb-2">
+                    <ul class="mb-2 inline-flex flex-col gap-5">
                         @foreach ($rsvp->guests as $index => $guest)
-                            <li class="inline-flex"><x-toggle :id="$guest->id" model="attending_guests" :text="$guest->name" /></li>
+                            <li class="inline-flex">
+                                <x-toggle :id="$guest->id" model="attending_guests" :text="$guest->name" />
+                            </li>
                         @endforeach
                     </ul>
                 </div>
 
-                <div class="flex flex-col mb-2">
+                <div class="mb-2 flex flex-col">
                     @if (! empty($attending_guests))
                         <h2>Any dietary requirements or allergies?</h2>
-                        <div class="flex gap-6 mb-2">
+                        <div class="mb-2 flex gap-6">
                             <x-radio-button model="has_dietary_requirements" :value="true" name="yes_dietary">
                                 Yes
                             </x-radio-button>
@@ -49,7 +51,7 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="flex flex-col mb-2">
+                <div class="mb-2 flex flex-col">
                     <h2>Song request</h2>
                     <input
                         type="text"
@@ -65,7 +67,7 @@
                     id="message"
                     rows="4"
                     wire:model="message"
-                    class=" border-dark-green focus:ring-dark-green block w-full rounded-lg border bg-white p-2.5"
+                    class="border-dark-green focus:ring-dark-green block w-full rounded-lg border bg-white p-2.5"
                     placeholder="Start your message..."
                 ></textarea>
             @endif
@@ -82,9 +84,9 @@
     @else
         <div>
             <h2 class="pb-2">
-                @if($stage === \App\Enums\RsvpStage::CONFIRM->value)
+                @if ($stage === \App\Enums\RsvpStage::CONFIRM->value)
                     Review your details
-                @elseif($attending)
+                @elseif ($attending)
                     Thank You!
                 @else
                     Sorry you can't attend
@@ -92,11 +94,11 @@
             </h2>
             @if ($stage === \App\Enums\RsvpStage::OVERVIEW->value)
                 <p>
-                    @if($attending)
+                    @if ($attending)
                         Thanks for letting us know who will be attending.
                     @endif
-                    If things change you can update your information
-                    here until 1st September 2025.
+
+                    If things change you can update your information here until {{ $deadline->format('jS F Y') }}.
                 </p>
             @endif
 
@@ -152,7 +154,7 @@
                     </ul>
                 @endif
 
-                <div class="flex flex-col gap-4 mt-8">
+                <div class="mt-8 flex flex-col gap-4">
                     @if ($stage === \App\Enums\RsvpStage::CONFIRM->value)
                         <x-button
                             wire:click.prevent="confirm()"
@@ -173,14 +175,17 @@
                             </span>
                         </x-button>
                     @else
-                        <x-button
-                            class="w-full md:w-52"
-                            wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')"
-                            text="Update RSVP"
-                        />
+                        @if ($deadline->greaterThan(now()))
+                            <x-button
+                                class="w-full md:w-52"
+                                wire:click.prevent="setStage('{{\App\Enums\RsvpStage::FORM->value}}')"
+                                text="Update RSVP"
+                            />
+                        @endif
+
                         <h2>Want to learn more about the day?</h2>
-                    <p>From food to order of service, we've got it covered!</p>
-                    <x-link-button :href="route('home')" class="w-full md:w-52">Visit our homepage</x-link-button>
+                        <p>From food to order of service, we've got it covered!</p>
+                        <x-link-button :href="route('home')" class="w-full md:w-52">Visit our homepage</x-link-button>
                     @endif
                 </div>
             </div>

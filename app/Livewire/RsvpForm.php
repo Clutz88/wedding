@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Enums\RsvpStage;
 use App\Models\Guest;
 use App\Models\Rsvp as RsvpModel;
+use App\Settings\Wedding;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -30,16 +32,19 @@ class RsvpForm extends Component
 
     public Collection $dietary_requirements;
 
+    public Carbon $deadline;
+
     public function mount(RsvpModel $rsvp): void
     {
         $this->rsvp = $rsvp;
         $this->attending = $rsvp->attending === null ? null : (bool) $rsvp->attending;
         $this->has_dietary_requirements = $rsvp->dietary_requirements;
         $this->dietary_requirements = collect();
-        $this->stage = $rsvp->attending === null ? RsvpStage::FORM->value : RsvpStage::OVERVIEW->value;
         $this->message = $rsvp->message;
         $this->song_request = $rsvp->song_request;
         $this->type = $rsvp->guests->first()?->type?->value ?? 'day';
+        $this->deadline = app(Wedding::class)->rsvpDeadline();
+        $this->setStage($rsvp->attending === null ? RsvpStage::FORM : RsvpStage::OVERVIEW);
 
         $this->rsvp->guests->each(function (Guest $guest) {
             if ($guest->attending) {
@@ -55,7 +60,7 @@ class RsvpForm extends Component
 
     public function setStage(RsvpStage $stage): void
     {
-        $this->stage = $stage->value;
+        $this->stage = $this->deadline->greaterThan(now()) ? $stage->value : RsvpStage::OVERVIEW->value;
     }
 
     public function getDietaryRequirements(string $id): string

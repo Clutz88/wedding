@@ -1,6 +1,9 @@
 <x-section>
     <x-section-header title="RSVP">
-        <p>This is where you can let us know if you can attend, changes can be made until 1st august 2025.</p>
+        <p>
+            This is where you can let us know if you can attend, changes can be made until
+            {{ app(\App\Settings\Wedding::class)->rsvpDeadline()->format('jS F Y') }}.
+        </p>
     </x-section-header>
 
     <form class="flex w-full flex-col items-start gap-4" wire:submit.prevent="search">

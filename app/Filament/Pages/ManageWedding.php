@@ -28,6 +28,9 @@ class ManageWedding extends SettingsPage
                     ->seconds(false)
                     ->native(false)
                     ->label('Start'),
+                DateTimePicker::make('rsvp_deadline')
+                    ->native(false)
+                    ->label('RSVP Deadline'),
             ]);
     }
 }
