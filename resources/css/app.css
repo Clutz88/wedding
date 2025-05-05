@@ -36,7 +36,7 @@ h4 {
     @apply font-tropikal text-dark-green;
 }
 h2 {
-    @apply !text-3xl mt-8 mb-4;
+    @apply mt-8 mb-4 !text-3xl;
 }
 
 h2:has(svg) {
@@ -48,12 +48,14 @@ h2 svg {
 }
 
 h3 {
-    @apply !text-2xl mt-6 mb-2;
+    @apply mt-6 mb-2 !text-2xl;
 }
 h4 {
     @apply !text-xl;
 }
-p { @apply mb-2;}
+p {
+    @apply mb-2;
+}
 
 #mobile-nav li:not(:last-child):after {
     content: '';
