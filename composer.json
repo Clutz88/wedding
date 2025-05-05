@@ -9,29 +9,29 @@
         "php": "^8.4",
         "codeat3/blade-line-awesome-icons": "^1.5",
         "codeat3/blade-phosphor-icons": "^2.3",
-        "filament/filament": "^3.3.8",
-        "filament/spatie-laravel-settings-plugin": "^3.3.8",
+        "filament/filament": "^3.3.14",
+        "filament/spatie-laravel-settings-plugin": "^3.3.14",
         "joshembling/image-optimizer": "^1.6",
-        "laravel/framework": "^12.7.2",
+        "laravel/framework": "^12.12.0",
         "laravel/tinker": "^2.10.1",
         "mallardduck/blade-boxicons": "^2.4",
         "mallardduck/blade-lucide-icons": "^1.23",
         "owenvoke/blade-fontawesome": "^2.9.1",
-        "scify/laravel-cookie-guard": "^4.1.2",
+        "scify/laravel-cookie-guard": "^4.1.3",
         "sentry/sentry-laravel": "^4.13",
         "simplesoftwareio/simple-qrcode": "^4.2",
-        "spatie/laravel-settings": "^3.4.2"
+        "spatie/laravel-settings": "^3.4.4"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.15.2",
+        "barryvdh/laravel-debugbar": "^3.15.4",
         "fakerphp/faker": "^1.24.1",
         "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.21.2",
-        "laravel/sail": "^1.41",
+        "laravel/pint": "^1.22.0",
+        "laravel/sail": "^1.42",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.0",
-        "pestphp/pest": "^3.8.1",
-        "pestphp/pest-plugin-laravel": "^3.1"
+        "pestphp/pest": "^3.8.2",
+        "pestphp/pest-plugin-laravel": "^3.2"
     },
     "autoload": {
         "psr-4": {
