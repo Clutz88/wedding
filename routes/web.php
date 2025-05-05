@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 Route::get('order-of-service', Itinerary::class)->name('order-of-service');
-//Route::get('venue', Venue::class)->name('venue');
+// Route::get('venue', Venue::class)->name('venue');
 Route::get('rsvp', RsvpSearch::class)->name('rsvp.search');
 Route::get('rsvp/{rsvp}', Rsvp::class)->name('rsvp');
 Route::get('gallery', Gallery::class)->name('gallery');
-//Route::get('menu', Menu::class)->name('menu');
+// Route::get('menu', Menu::class)->name('menu');
 
-//Route::bind('page', function ($value) {
+// Route::bind('page', function ($value) {
 //    return \App\Models\Page::with('seo')->where('slug', $value)->firstOrFail();
-//});
+// });
 Route::get('{page:slug}', Page::class)->name('page');
