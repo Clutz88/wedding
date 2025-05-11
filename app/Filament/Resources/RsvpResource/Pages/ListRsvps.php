@@ -10,6 +10,13 @@ class ListRsvps extends ListRecords
 {
     protected static string $resource = RsvpResource::class;
 
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            RsvpResource\Widgets\Stats::class,
+        ];
+    }
+
     protected function getHeaderActions(): array
     {
         return [

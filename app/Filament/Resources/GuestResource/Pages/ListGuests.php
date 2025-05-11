@@ -10,6 +10,13 @@ class ListGuests extends ListRecords
 {
     protected static string $resource = GuestResource::class;
 
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            GuestResource\Widgets\GuestAttendingPie::class,
+        ];
+    }
+
     protected function getHeaderActions(): array
     {
         return [
