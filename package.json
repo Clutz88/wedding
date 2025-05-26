@@ -14,7 +14,7 @@
         "prettier": "^3.5.3",
         "prettier-plugin-blade": "^2.1.21",
         "prettier-plugin-tailwindcss": "^0.6.11",
-        "sharp": "^0.34.1",
+        "sharp": "^0.34.2",
         "tailwindcss": "^4.1.7",
         "vite": "^6.3.5",
         "vite-plugin-image-optimizer": "^1.1.8"
