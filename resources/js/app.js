@@ -2,6 +2,7 @@ import './bootstrap';
 import './confetti';
 import './gallery';
 import 'flowbite';
+import intersect from '@alpinejs/intersect';
 
 document.addEventListener('livewire:navigating', () => {
     // Mutate the HTML before the page is navigated away...
@@ -14,3 +15,5 @@ document.addEventListener('livewire:navigated', () => {
 });
 
 import.meta.glob(['../images/**']);
+
+window.Alpine.plugin(intersect);
