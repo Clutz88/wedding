@@ -62,7 +62,7 @@ $pondLocalizations = __('livewire-filepond::filepond');
           allowMultiple: isMultiple,
           server: {
               process: async (fieldName, file, metadata, load, error, progress) => {
-                  $dispatch('filepond-upload-started', '{{ $wireModelAttribute }}');
+                  $dispatch('filepond-upload-started',  {'attribute' : '{{ $wireModelAttribute }}'});
                   await @this.upload('{{ $wireModelAttribute }}', file, async (response) => {
                     let validationResult  = await @this.call('validateUploadedFile', response);
                         // Check server validation result

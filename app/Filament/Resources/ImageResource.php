@@ -12,6 +12,7 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -52,8 +53,7 @@ class ImageResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('description'),
-
-                TextColumn::make('location'),
+                ImageColumn::make('location'),
             ])
             ->filters([
                 //

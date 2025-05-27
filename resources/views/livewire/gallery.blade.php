@@ -6,24 +6,28 @@
     <livewire:gallery-upload />
 
     <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        @foreach ($imageSplits as $imageSplit)
-            <div class="grid gap-4">
-                @foreach ($imageSplit as $image)
-                    <div>
-                        <img
-                            @click="() => {
-                            document.getElementById('modal-image').src = '{{ asset('storage/' . $image->location) }}';
-{{-- document.getElementById('modal-title').innerText = '{{ $image->description }}'; --}}
-                            window.modal.show();
-                        }"
-                            class="h-auto max-w-full rounded-lg"
-                            src="{{ asset('storage/' . $image->location) }}"
-                            alt=""
-                        />
-                    </div>
-                @endforeach
-            </div>
+        @foreach ($imagePages as $imageSplits)
+            @foreach ($imageSplits as $imageSplit)
+                <div class="grid h-fit gap-4">
+                    @foreach ($imageSplit as $image)
+                        <div>
+                            <img
+                                @click="() => {
+                                document.getElementById('modal-image').src = '{{ asset('storage/' . $image->location) }}';
+    {{-- document.getElementById('modal-title').innerText = '{{ $image->description }}'; --}}
+                                window.modal.show();
+                            }"
+                                class="h-auto max-w-full rounded-lg"
+                                src="{{ asset('storage/' . $image->location) }}"
+                                alt=""
+                            />
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
         @endforeach
+
+        <div x-intersect="$wire.loadMore()" class="-z-1 h-40 w-full -translate-y-44 bg-black"></div>
     </div>
 
     <div
@@ -42,7 +46,7 @@
             {{-- ></h3> --}}
             <button
                 type="button"
-                class="absolute top-5 right-5 z-60 inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-transparent text-sm text-gray-900 hover:bg-gray-400 hover:text-gray-900"
+                class="absolute top-5 right-5 z-60 inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-transparent text-sm text-gray-900 mix-blend-hard-light hover:bg-gray-400 hover:text-gray-900"
                 @click="window.modal.hide()"
             >
                 <svg
