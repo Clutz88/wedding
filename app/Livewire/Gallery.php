@@ -9,8 +9,10 @@ class Gallery extends Component
 {
     public function render()
     {
+        $images = Image::all();
+        $imageSplits = $images->split(4);
         return view('livewire.gallery', [
-            'images' => Image::all(),
+            'imageSplits' => $imageSplits,
         ]);
     }
 }

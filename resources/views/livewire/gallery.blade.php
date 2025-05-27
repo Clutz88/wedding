@@ -3,150 +3,27 @@
         Take a look at some photos from our amazing day, we'd love to see your photos too! 📸🤵👰
     </x-section-header>
 
-    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <div class="grid gap-4">
-            @foreach ($images as $image)
-                <div>
-                    <img
-                        @click="() => {
-                            document.getElementById('modal-image').src = '{{ asset('storage/' . $image->location) }}';
-                            document.getElementById('modal-title').innerText = '{{ $image->description }}';
-                            window.modal.show();
-                        }"
-                        class="h-auto max-w-full rounded-lg"
-                        src="{{ asset('storage/' . $image->location) }}"
-                        alt=""
-                    />
-                </div>
-            @endforeach
+    <livewire:gallery-upload />
 
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+        @foreach ($imageSplits as $imageSplit)
+            <div class="grid gap-4">
+                @foreach ($imageSplit as $image)
+                    <div>
+                        <img
+                            @click="() => {
+                            document.getElementById('modal-image').src = '{{ asset('storage/' . $image->location) }}';
+{{-- document.getElementById('modal-title').innerText = '{{ $image->description }}'; --}}
                             window.modal.show();
                         }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
-                    alt=""
-                />
+                            class="h-auto max-w-full rounded-lg"
+                            src="{{ asset('storage/' . $image->location) }}"
+                            alt=""
+                        />
+                    </div>
+                @endforeach
             </div>
-        </div>
-        <div class="grid gap-4">
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
-                    alt=""
-                />
-            </div>
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg"
-                    alt=""
-                />
-            </div>
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg"
-                    alt=""
-                />
-            </div>
-        </div>
-        <div class="grid gap-4">
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg"
-                    alt=""
-                />
-            </div>
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg"
-                    alt=""
-                />
-            </div>
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg"
-                    alt=""
-                />
-            </div>
-        </div>
-        <div class="grid gap-4">
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg"
-                    alt=""
-                />
-            </div>
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg"
-                    alt=""
-                />
-            </div>
-            <div>
-                <img
-                    @click="() => {
-                            document.getElementById('modal-image').src = 'https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg';
-                            document.getElementById('modal-title').innerText = 'Image';
-                            window.modal.show();
-                        }"
-                    class="h-auto max-w-full rounded-lg"
-                    src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
-                    alt=""
-                />
-            </div>
-        </div>
+        @endforeach
     </div>
 
     <div
@@ -159,10 +36,10 @@
         <div class="relative flex h-fit w-fit flex-col shadow-sm">
             <!-- Modal header -->
             {{-- <div class="flex items-center justify-between rounded-t border-b border-gray-200 p-4 md:p-5"> --}}
-            <h3
-                class="!font-quick absolute bottom-0 z-60 w-full bg-gradient-to-b from-transparent to-black py-2 text-center text-xl font-semibold !text-white"
-                id="modal-title"
-            ></h3>
+            {{-- <h3 --}}
+            {{-- class="!font-quick absolute bottom-0 z-60 w-full bg-gradient-to-b from-transparent to-black py-2 text-center text-xl font-semibold !text-white" --}}
+            {{-- id="modal-title" --}}
+            {{-- ></h3> --}}
             <button
                 type="button"
                 class="absolute top-5 right-5 z-60 inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-transparent text-sm text-gray-900 hover:bg-gray-400 hover:text-gray-900"
