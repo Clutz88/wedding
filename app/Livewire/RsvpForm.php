@@ -7,6 +7,7 @@ use App\Models\Guest;
 use App\Models\Rsvp as RsvpModel;
 use App\Settings\Wedding;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -70,7 +71,16 @@ class RsvpForm extends Component
             ->implode(fn ($value) => $value, ', ');
     }
 
-    public function confirm()
+    public function attending_click(): void
+    {
+        if ($this->rsvp->guests->count() > 1) {
+            return;
+        }
+
+        $this->attending_guests[] = $this->rsvp->guests->first();
+    }
+
+    public function confirm(): void
     {
         // Update rsvp fields
         $this->rsvp->attending = (bool) $this->attending;
@@ -78,7 +88,7 @@ class RsvpForm extends Component
         $this->rsvp->message = $this->message;
         $this->rsvp->song_request = $this->song_request;
         $this->rsvp->save();
-        // Update each guest fields
+        // Update all guest fields
         foreach ($this->rsvp->guests as $guest) {
             $guest->attending = $this->rsvp->attending && in_array($guest->id, $this->attending_guests);
             if ($this->rsvp->attending) {
@@ -92,7 +102,7 @@ class RsvpForm extends Component
         $this->stage = RsvpStage::OVERVIEW->value;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.rsvp.form')->title('RSVP');
     }

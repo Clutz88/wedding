@@ -3,11 +3,18 @@
         <form class="-mt-8 flex flex-col rounded">
             <div class="flex flex-col">
                 <h2 class="flex items-center gap-1 text-3xl">
-                    Can you attend as a{{ $type === \App\Enums\GuestType::EVENING->value ? 'n' : '' }} {{ $type }}
-                    guest?
+                    Can
+                    @if ($rsvp->guests->count() > 1)
+                        anyone in your party
+                    @else
+                        you
+                    @endif
+                    attend as a{{ $type === \App\Enums\GuestType::EVENING->value ? 'n' : '' }} {{ $type }} guest?
                 </h2>
                 <div class="flex gap-6">
-                    <x-radio-button model="attending" :value="true" name="yes_attending">Yes</x-radio-button>
+                    <x-radio-button model="attending" :value="true" name="yes_attending" wire:click="attending_click">
+                        Yes
+                    </x-radio-button>
                     <x-radio-button model="attending" :value="false" name="no_attending">No</x-radio-button>
                 </div>
                 @if ($attending)
@@ -29,7 +36,14 @@
 
                 <div class="mb-2 flex flex-col">
                     @if (! empty($attending_guests))
-                        <h2>Any dietary requirements or allergies?</h2>
+                        <h2>
+                            Any dietary requirements or allergies
+                            @if ($rsvp->guests->count() > 1)
+                                in your party
+                            @endif
+
+                            ?
+                        </h2>
                         <div class="mb-2 flex gap-6">
                             <x-radio-button model="has_dietary_requirements" :value="true" name="yes_dietary">
                                 Yes
