@@ -17,8 +17,11 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SelectColumn;
+use App\Enums\GuestType;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class GuestResource extends Resource
 {
@@ -60,9 +63,6 @@ class GuestResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                SelectColumn::make('age_group')
-                    ->options(['adult' => 'Adult', 'child' => 'Child'])
-                    ->label('Age Group'),
                 SelectColumn::make('type')
                     ->options(['day' => 'Day', 'evening' => 'Evening'])
                     ->label('Type'),
@@ -72,7 +72,25 @@ class GuestResource extends Resource
                 IconColumn::make('attending')->boolean(),
             ])
             ->filters([
-                //
+                SelectFilter::make('type')
+                    ->options(GuestType::class),
+                SelectFilter::make('attending')
+                    ->label('Attending Status')
+                    ->options([
+                        'attending' => 'Attending',
+                        'not_attending' => 'Not Attending',
+                        'not_responded' => 'Not Responded',
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when($data['value'] ?? null, function (Builder $query, $value): Builder {
+                            return match ($value) {
+                                'attending' => $query->where('attending', true),
+                                'not_attending' => $query->where('attending', false),
+                                'not_responded' => $query->whereNull('attending'),
+                                default => $query,
+                            };
+                        });
+                    }),
             ])
             ->headerActions([
                 ExportAction::make()
