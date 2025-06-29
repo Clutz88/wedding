@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class GuestResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Manage';
+    protected static ?string $navigationGroup = 'Guests';
 
     protected static ?string $model = Guest::class;
 
@@ -33,7 +33,7 @@ class GuestResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -62,14 +62,17 @@ class GuestResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->sortable()
                     ->searchable(),
-                SelectColumn::make('type')
-                    ->options(['day' => 'Day', 'evening' => 'Evening'])
-                    ->label('Type'),
+                TextColumn::make('type')
+                    ->formatStateUsing(fn ($state) => ucfirst($state->value))
+                    ->sortable(),
                 TextColumn::make('dietary_requirements')
                     ->searchable()
-                    ->separator(),
-                IconColumn::make('attending')->boolean(),
+                    ->sortable(),
+                IconColumn::make('attending')
+                    ->sortable()
+                    ->boolean(),
             ])
             ->filters([
                 SelectFilter::make('type')
@@ -94,11 +97,12 @@ class GuestResource extends Resource
             ])
             ->headerActions([
                 ExportAction::make()
+                    ->columnMapping(false)
                     ->exporter(GuestExporter::class),
             ])
             ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
+//                EditAction::make(),
+//                DeleteAction::make(),
             ])
             ->bulkActions([
                 //

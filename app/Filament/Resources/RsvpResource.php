@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\RequestExporter;
 use App\Filament\Resources\RsvpResource\Pages;
 use App\Filament\Resources\RsvpResource\RelationManagers\GuestsRelationManager;
 use App\Models\Rsvp;
@@ -9,15 +10,15 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class RsvpResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Manage';
+    protected static ?string $navigationGroup = 'Guests';
 
     protected static ?string $model = Rsvp::class;
 
@@ -33,7 +34,8 @@ class RsvpResource extends Resource
             ->schema([
                 TextInput::make('name'),
                 TextInput::make('code'),
-                TextInput::make('song_request')->columnSpanFull(),
+                TextInput::make('song_request')
+                    ->columnSpanFull(),
                 Select::make('attending')
                     ->options([false => 'not attending', true => 'attending']),
                 Select::make('dietary_requirements')
@@ -45,27 +47,56 @@ class RsvpResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('code'),
-                TextColumn::make('guests.name'),
-                TextColumn::make('song_request'),
+                TextColumn::make('name')
+                    ->sortable(),
+                TextColumn::make('code')
+                    ->sortable(),
+                TextColumn::make('guests.name')
+                    ->sortable(),
+                TextColumn::make('song_request')
+                    ->sortable(),
                 IconColumn::make('attending')
+                    ->sortable()
                     ->boolean(),
                 IconColumn::make('dietary_requirements')
-                    ->boolean(),
+                    ->boolean()
+                    ->sortable(),
             ])
             ->filters([
-                //
-            ])
-            ->headerActions([
-                //
-            ])
-            ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
-            ])
-            ->bulkActions([
-                //
+                SelectFilter::make('attending')
+                    ->label('Attending Status')
+                    ->options([
+                        'attending' => 'Attending',
+                        'not_attending' => 'Not Attending',
+                        'not_responded' => 'Not Responded',
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when($data['value'] ?? null, function (Builder $query, $value): Builder {
+                            return match ($value) {
+                                'attending' => $query->where('attending', true),
+                                'not_attending' => $query->where('attending', false),
+                                'not_responded' => $query->whereNull('attending'),
+                                default => $query,
+                            };
+                        });
+                    }),
+                SelectFilter::make('dietary_requirements')
+                    ->label('Dietary Requirements')
+                    ->options([
+                        'requirements' => 'Requirements',
+                        'no_requirements' => 'No Requirements',
+                        'not_responded' => 'Not Responded',
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when($data['value'] ?? null, function (Builder $query, $value): Builder {
+                            return match ($value) {
+                                'requirements' => $query->where('dietary_requirements', true),
+                                'no_requirements' => $query->where('dietary_requirements', false),
+                                'not_responded' => $query->whereNull('dietary_requirements'),
+                                default => $query,
+                            };
+                        });
+                    }),
             ]);
     }
 

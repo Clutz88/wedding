@@ -15,12 +15,15 @@ class GuestExporter extends Exporter
     {
         return [
             ExportColumn::make('name'),
-            ExportColumn::make('email'),
-            ExportColumn::make('gender'),
             ExportColumn::make('age_group'),
             ExportColumn::make('dietary_requirements'),
-            ExportColumn::make('attending'),
-            ExportColumn::make('rsvp.name'),
+            ExportColumn::make('attending')
+                ->formatStateUsing(fn ($state): string => match ($state) {
+                    0 => 'Not Attending',
+                    1 => 'Attending',
+                    default => 'No Response',
+                }),
+            ExportColumn::make('rsvp.song_request'),
         ];
     }
 

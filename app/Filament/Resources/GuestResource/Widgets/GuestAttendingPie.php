@@ -29,7 +29,7 @@ class GuestAttendingPie extends ChartWidget
                     ]
                 ]
             ],
-            'labels' => ['Attending', 'Not attending', 'N/A']
+            'labels' => ['Attending', 'Not attending', 'No response']
         ];
     }
 
