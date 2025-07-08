@@ -5643,16 +5643,16 @@
         },
         {
             "name": "scify/laravel-cookie-guard",
-            "version": "v4.1.4",
+            "version": "v4.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scify/laravel-cookie-guard.git",
-                "reference": "a2e626ce8b0f7e47b55acbc12081dbcc59ec6d7d"
+                "reference": "090e8bd10f71d96e6bd77cfbc07f9d30aefeb394"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scify/laravel-cookie-guard/zipball/a2e626ce8b0f7e47b55acbc12081dbcc59ec6d7d",
-                "reference": "a2e626ce8b0f7e47b55acbc12081dbcc59ec6d7d",
+                "url": "https://api.github.com/repos/scify/laravel-cookie-guard/zipball/090e8bd10f71d96e6bd77cfbc07f9d30aefeb394",
+                "reference": "090e8bd10f71d96e6bd77cfbc07f9d30aefeb394",
                 "shasum": ""
             },
             "require": {
@@ -5712,9 +5712,9 @@
             ],
             "support": {
                 "issues": "https://github.com/scify/laravel-cookie-guard/issues",
-                "source": "https://github.com/scify/laravel-cookie-guard/tree/v4.1.4"
+                "source": "https://github.com/scify/laravel-cookie-guard/tree/v4.1.6"
             },
-            "time": "2025-06-06T06:56:53+00:00"
+            "time": "2025-07-07T12:24:42+00:00"
         },
         {
             "name": "sentry/sentry",
