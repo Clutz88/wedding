@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\RsvpResource\Pages;
 
+use App\Filament\Resources\RsvpResource\Widgets\Stats;
 use App\Filament\Resources\RsvpResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
@@ -13,7 +14,7 @@ class ListRsvps extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            RsvpResource\Widgets\Stats::class,
+            Stats::class,
         ];
     }
 
