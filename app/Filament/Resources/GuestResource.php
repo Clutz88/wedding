@@ -2,6 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Actions\ExportAction;
+use App\Filament\Resources\GuestResource\Pages\ListGuests;
+use App\Filament\Resources\GuestResource\Pages\CreateGuest;
+use App\Filament\Resources\GuestResource\Pages\EditGuest;
 use App\Enums\DietaryRequirements;
 use App\Filament\Exports\GuestExporter;
 use App\Filament\Resources\GuestResource\Pages;
@@ -10,11 +15,9 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SelectColumn;
 use App\Enums\GuestType;
@@ -25,20 +28,20 @@ use Illuminate\Database\Eloquent\Builder;
 
 class GuestResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Guests';
+    protected static string | \UnitEnum | null $navigationGroup = 'Guests';
 
     protected static ?string $model = Guest::class;
 
     protected static ?string $slug = 'guests';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-user';
 
     protected static ?int $navigationSort = 1;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('name')
                     ->label('Name'),
                 TextInput::make('email')
@@ -100,11 +103,11 @@ class GuestResource extends Resource
                     ->columnMapping(false)
                     ->exporter(GuestExporter::class),
             ])
-            ->actions([
+            ->recordActions([
 //                EditAction::make(),
 //                DeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 //
             ]);
     }
@@ -112,9 +115,9 @@ class GuestResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGuests::route('/'),
-            'create' => Pages\CreateGuest::route('/create'),
-            'edit' => Pages\EditGuest::route('/{record}/edit'),
+            'index' => ListGuests::route('/'),
+            'create' => CreateGuest::route('/create'),
+            'edit' => EditGuest::route('/{record}/edit'),
         ];
     }
 

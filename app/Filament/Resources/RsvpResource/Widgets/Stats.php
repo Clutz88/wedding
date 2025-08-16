@@ -7,9 +7,9 @@ use Filament\Widgets\ChartWidget;
 
 class Stats extends ChartWidget
 {
-    protected static ?string $pollingInterval = null;
+    protected ?string $pollingInterval = null;
 
-    protected static ?string $heading = 'RSVPs Completed';
+    protected ?string $heading = 'RSVPs Completed';
 
     protected function getData(): array
     {

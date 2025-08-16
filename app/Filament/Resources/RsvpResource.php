@@ -2,13 +2,16 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use App\Filament\Resources\RsvpResource\Pages\ListRsvps;
+use App\Filament\Resources\RsvpResource\Pages\CreateRsvp;
+use App\Filament\Resources\RsvpResource\Pages\EditRsvp;
 use App\Filament\Exports\RequestExporter;
 use App\Filament\Resources\RsvpResource\Pages;
 use App\Filament\Resources\RsvpResource\RelationManagers\GuestsRelationManager;
 use App\Models\Rsvp;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -18,20 +21,20 @@ use Illuminate\Database\Eloquent\Builder;
 
 class RsvpResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Guests';
+    protected static string | \UnitEnum | null $navigationGroup = 'Guests';
 
     protected static ?string $model = Rsvp::class;
 
     protected static ?string $slug = 'rsvps';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-check';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-document-check';
 
     protected static ?int $navigationSort = 1;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('name'),
                 TextInput::make('code'),
                 TextInput::make('song_request')
@@ -110,9 +113,9 @@ class RsvpResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRsvps::route('/'),
-            'create' => Pages\CreateRsvp::route('/create'),
-            'edit' => Pages\EditRsvp::route('/{record}/edit'),
+            'index' => ListRsvps::route('/'),
+            'create' => CreateRsvp::route('/create'),
+            'edit' => EditRsvp::route('/{record}/edit'),
         ];
     }
 

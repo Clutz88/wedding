@@ -2,24 +2,24 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Schemas\Schema;
 use App\Settings\Wedding;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 
 class ManageWedding extends SettingsPage
 {
-    protected static ?string $navigationGroup = 'Settings';
+    protected static string | \UnitEnum | null $navigationGroup = 'Settings';
 
-    protected static ?string $navigationIcon = 'lineawesome-ring-solid';
+    protected static string | \BackedEnum | null $navigationIcon = 'lineawesome-ring-solid';
 
     protected static string $settings = Wedding::class;
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('groom')
                     ->label('Groom'),
                 TextInput::make('bride')

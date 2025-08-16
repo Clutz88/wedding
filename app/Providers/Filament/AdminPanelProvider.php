@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Pages\Dashboard;
+use App\Filament\Resources\GuestResource\Widgets\GuestStats;
+use App\Filament\Resources\GuestResource\Widgets\GuestAttendingPie;
 use App\Filament\Resources\GuestResource\Widgets;
 use App\Filament\Resources\RsvpResource\Widgets as RsvpWidgets;
 use Filament\Http\Middleware\Authenticate;
@@ -35,14 +38,14 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
             ->databaseNotifications()
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\GuestStats::class,
+                GuestStats::class,
                 RsvpWidgets\Stats::class,
-                Widgets\GuestAttendingPie::class,
+                GuestAttendingPie::class,
             ])
             ->middleware([
                 EncryptCookies::class,

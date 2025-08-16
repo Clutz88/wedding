@@ -7,9 +7,9 @@ use Filament\Widgets\ChartWidget;
 
 class GuestAttendingPie extends ChartWidget
 {
-    protected static ?string $pollingInterval = null;
+    protected ?string $pollingInterval = null;
 
-    protected static ?string $heading = 'Guest Attending';
+    protected ?string $heading = 'Guest Attending';
 
     protected function getData(): array
     {
