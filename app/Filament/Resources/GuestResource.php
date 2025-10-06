@@ -56,7 +56,7 @@ class GuestResource extends Resource
                     ->multiple()
                     ->options(DietaryRequirements::class)
                     ->columnSpanFull(),
-                Checkbox::make('attending')->visible(fn (Guest $guest): bool => $guest->id !== null),
+                Checkbox::make('attending')->visible(fn (Guest|null $guest): bool => $guest?->id !== null),
             ]);
     }
 
