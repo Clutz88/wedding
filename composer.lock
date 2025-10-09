@@ -5837,16 +5837,16 @@
         },
         {
             "name": "scify/laravel-cookie-guard",
-            "version": "v4.1.6",
+            "version": "v4.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scify/laravel-cookie-guard.git",
-                "reference": "090e8bd10f71d96e6bd77cfbc07f9d30aefeb394"
+                "reference": "811e2be6b56118a0809168d4ea2681bbadc6605c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scify/laravel-cookie-guard/zipball/090e8bd10f71d96e6bd77cfbc07f9d30aefeb394",
-                "reference": "090e8bd10f71d96e6bd77cfbc07f9d30aefeb394",
+                "url": "https://api.github.com/repos/scify/laravel-cookie-guard/zipball/811e2be6b56118a0809168d4ea2681bbadc6605c",
+                "reference": "811e2be6b56118a0809168d4ea2681bbadc6605c",
                 "shasum": ""
             },
             "require": {
@@ -5906,9 +5906,9 @@
             ],
             "support": {
                 "issues": "https://github.com/scify/laravel-cookie-guard/issues",
-                "source": "https://github.com/scify/laravel-cookie-guard/tree/v4.1.6"
+                "source": "https://github.com/scify/laravel-cookie-guard/tree/v4.1.7"
             },
-            "time": "2025-07-07T12:24:42+00:00"
+            "time": "2025-08-21T07:07:12+00:00"
         },
         {
             "name": "scrivo/highlight.php",
