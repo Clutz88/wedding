@@ -22,7 +22,7 @@
     "dependencies": {
         "@alpinejs/intersect": "^3.14.9",
         "@tailwindcss/forms": "^0.5.10",
-        "@tailwindcss/typography": "^0.5.16",
+        "@tailwindcss/typography": "^0.5.19",
         "@tailwindcss/vite": "^4.1.11",
         "js-confetti": "^0.12.0"
     }
