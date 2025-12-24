@@ -49,7 +49,6 @@
 
         <div>
             <label class="mb-2 block text-sm font-medium">Photos</label>
-            @filepondScripts
             <x-filepond::upload
                 wire:model.live="photos"
                 multiple="true"

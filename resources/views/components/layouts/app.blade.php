@@ -40,6 +40,7 @@
         {{-- /> --}}
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @filepondScripts
     </head>
     <body class="!m-0 flex min-h-screen flex-col">
         <x-header />
