@@ -19,32 +19,40 @@
         <div
             class="columns-2 gap-4 md:columns-3 lg:columns-4"
             x-data="{
-            lightbox: null,
-            currentIndex: 0,
-            images: [
-                @foreach ($photos as $photo)
-
-                    @foreach ($photo->getMedia('wedding-photos') as $media)
-                        { url: '{{ $media->getUrl('large') }}', originalUrl: '{{ $media->getUrl() }}', title: 'Photo by {{ $photo->guest_name }}' },
+                lightbox: null,
+                currentIndex: 0,
+                images: [],
+                init() {
+                    // Initialize images array from initially loaded photos
+                    @php $initIndex = 0; @endphp
+                    @foreach ($photos as $photo)
+                        @foreach ($photo->getMedia('wedding-photos') as $media)
+                            @if($media->hasGeneratedConversion('thumb'))
+                                this.images.push({
+                                    url: '{{ $media->getUrl('large') }}',
+                                    originalUrl: '{{ $media->getUrl() }}',
+                                    title: 'Photo by {{ $photo->guest_name }}'
+                                });
+                            @endif
+                        @endforeach
                     @endforeach
-                @endforeach
-
-            ],
-            openLightbox(index) {
-                this.currentIndex = index;
-                this.lightbox = this.images[index];
-            },
-            nextImage() {
-                this.currentIndex = (this.currentIndex + 1) % this.images.length;
-                this.lightbox = this.images[this.currentIndex];
-            },
-            prevImage() {
-                this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-                this.lightbox = this.images[this.currentIndex];
-            }
-        }"
+                },
+                openLightbox(index) {
+                    this.currentIndex = index;
+                    this.lightbox = this.images[index];
+                },
+                nextImage() {
+                    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                    this.lightbox = this.images[this.currentIndex];
+                },
+                prevImage() {
+                    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                    this.lightbox = this.images[this.currentIndex];
+                }
+            }"
             @keydown.arrow-right.window="if (lightbox) nextImage()"
             @keydown.arrow-left.window="if (lightbox) prevImage()"
+            wire:update="$refresh"
         >
             @php
                 $imageIndex = 0;
@@ -53,17 +61,27 @@
             @foreach ($photos as $photo)
                 @foreach ($photo->getMedia('wedding-photos') as $media)
                     @php
+                        // Check if thumb conversion exists
+                        $hasThumb = $media->hasGeneratedConversion('thumb');
+                        if (!$hasThumb) {
+                            continue; // Skip this image if conversion isn't ready
+                        }
+
                         $thumbUrl = $media->getUrl('thumb');
-                        $originalUrl = $media->getUrl();
                         $currentIndex = $imageIndex++;
                     @endphp
 
                     <div class="mb-4 break-inside-avoid">
-                        <a href="#" @click.prevent="openLightbox({{ $currentIndex }})" class="block cursor-pointer">
+                        <a
+                            href="#"
+                            @click.prevent="openLightbox({{ $currentIndex }})"
+                            class="block cursor-pointer"
+                        >
                             <img
                                 src="{{ $thumbUrl }}"
                                 alt="Photo by {{ $photo->guest_name }}"
-                                class="w-full rounded-lg transition-transform hover:scale-105"
+                                class="w-full h-auto rounded-lg transition-transform hover:scale-105 bg-gray-200"
+                                style="min-height: 300px;"
                                 loading="lazy"
                             />
                         </a>
@@ -143,5 +161,20 @@
                 ></div>
             </div>
         </div>
+
+        <!-- Infinite Scroll Trigger -->
+        @if ($hasMorePages)
+            <div
+                x-intersect="$wire.loadMore()"
+                class="flex justify-center py-8"
+            >
+                <div class="text-gray-500">
+                    <svg class="animate-spin h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </div>
+            </div>
+        @endif
     @endif
 </x-section>

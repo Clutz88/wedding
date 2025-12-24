@@ -27,10 +27,10 @@ class GalleryPhoto extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->width(600)
-            ->nonQueued();
+            ->queued();
 
         $this->addMediaConversion('large')
             ->width(1600)
-            ->nonQueued();
+            ->queued();
     }
 }
