@@ -7,9 +7,10 @@
         </div>
     @endif
 
-    <form wire:submit.prevent="submit" class="mx-auto max-w-2xl space-y-6">
+    <form wire:submit.prevent="submit" class="mx-auto max-w-3xl space-y-6">
         <div class="flex flex-col">
-            <div class="flex justify-end">
+            <div class="flex justify-between">
+                <x-link-button :href="route('wedding-photos')">Back</x-link-button>
                 <x-button
                     type="submit"
                     class="w-full px-6 py-3 transition disabled:cursor-not-allowed disabled:opacity-50 md:w-fit"
@@ -58,10 +59,6 @@
             @error('photos')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
-
-            <p class="mt-2 text-sm text-gray-600">
-                Upload one or more photos from the wedding. They will be reviewed before appearing in the gallery.
-            </p>
         </div>
 
         <div class="flex flex-col">

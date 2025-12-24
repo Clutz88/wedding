@@ -51,7 +51,13 @@
                 :href="route('page', ['page' => 'menu'])"
                 :active="Request::is('page', ['page' => 'menu'])"
             >
-                Menu
+                Food Menu
+            </x-navigation-link>
+            <x-navigation-link
+                :href="route('wedding-photos')"
+                :active="Request::is('rsvp') || Request::is('wedding-photos')"
+            >
+                Photo Gallery
             </x-navigation-link>
         </ul>
     </div>

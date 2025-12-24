@@ -24,16 +24,10 @@
             images: [
                 @foreach ($photos as $photo)
 
-
-
-
                     @foreach ($photo->getMedia('wedding-photos') as $media)
                         { url: '{{ $media->getUrl('large') }}', originalUrl: '{{ $media->getUrl() }}', title: 'Photo by {{ $photo->guest_name }}' },
                     @endforeach
                 @endforeach
-
-
-
 
             ],
             openLightbox(index) {
