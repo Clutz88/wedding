@@ -17,105 +17,47 @@
         <p class="text-gray-600">No approved photos yet. Be the first to share your photos!</p>
     @else
         <div
-            class="columns-2 gap-4 md:columns-3 lg:columns-4"
+            class="min-h-[1700px] columns-2 gap-4 md:columns-3 lg:columns-4"
             x-data="{
                 lightbox: null,
                 currentIndex: 0,
-                images: [],
-                init() {
-                    // Initialize images array from initially loaded photos
-                    @php
-                    $initIndex = 0;
-
-@endphp
-                    @foreach ($photos as $photo)
-
-
-
-
-
-
-
-
-
-
-                        @foreach ($photo->getMedia('wedding-photos') as $media)
-
-
-
-
-
-
-
-
-
-
-                            @if ($media->hasGeneratedConversion('thumb'))
-                                this.images.push({
-                                    url: '{{ $media->getUrl('large') }}',
-                                    originalUrl: '{{ $media->getUrl() }}',
-                                    title: 'Photo by {{ $photo->guest_name }}'
-                                });
-                            @endif
-                        @endforeach
-                    @endforeach
-
-
-
-
-
-
-
-
-
-
+                getAllImages() {
+                    return Array.from(document.querySelectorAll('[data-photo-data]')).map(el => JSON.parse(el.dataset.photoData));
                 },
                 openLightbox(index) {
+                    const images = this.getAllImages();
                     this.currentIndex = index;
-                    this.lightbox = this.images[index];
+                    if (images[index]) {
+                        this.lightbox = images[index];
+                    }
                 },
                 nextImage() {
-                    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-                    this.lightbox = this.images[this.currentIndex];
+                    const images = this.getAllImages();
+                    this.currentIndex = (this.currentIndex + 1) % images.length;
+                    this.lightbox = images[this.currentIndex];
                 },
                 prevImage() {
-                    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-                    this.lightbox = this.images[this.currentIndex];
+                    const images = this.getAllImages();
+                    this.currentIndex = (this.currentIndex - 1 + images.length) % images.length;
+                    this.lightbox = images[this.currentIndex];
                 }
             }"
             @keydown.arrow-right.window="if (lightbox) nextImage()"
             @keydown.arrow-left.window="if (lightbox) prevImage()"
-            wire:update="$refresh"
         >
-            @php
-                $imageIndex = 0;
-            @endphp
-
-            @foreach ($photos as $photo)
-                @foreach ($photo->getMedia('wedding-photos') as $media)
-                    @php
-                        // Check if thumb conversion exists
-                        $hasThumb = $media->hasGeneratedConversion('thumb');
-                        if (! $hasThumb) {
-                            continue; // Skip this image if conversion isn't ready
-                        }
-
-                        $thumbUrl = $media->getUrl('thumb');
-                        $currentIndex = $imageIndex++;
-                    @endphp
-
-                    <div class="mb-4 break-inside-avoid">
-                        <a href="#" @click.prevent="openLightbox({{ $currentIndex }})" class="block cursor-pointer">
-                            <img
-                                src="{{ $thumbUrl }}"
-                                alt="Photo by {{ $photo->guest_name }}"
-                                class="h-auto w-full rounded-lg bg-gray-200 transition-transform hover:scale-105"
-                                style="min-height: 300px"
-                                loading="lazy"
-                            />
-                        </a>
-                    </div>
-                @endforeach
+            @foreach ($photos as $index => $photo)
+                <div class="mb-4 break-inside-avoid"
+                     data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
+                    <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                        <img
+                            src="{{ $photo->thumb_url }}"
+                            alt="Photo by {{ $photo->guest_name }}"
+                            class="h-auto w-full rounded-lg bg-gray-200 transition-transform hover:scale-105"
+                            style="min-height: 400px"
+                            loading="lazy"
+                        />
+                    </a>
+                </div>
             @endforeach
 
             <!-- Lightbox Modal -->
@@ -193,7 +135,7 @@
 
         <!-- Infinite Scroll Trigger -->
         @if ($hasMorePages)
-            <div x-intersect="$wire.loadMore()" class="flex justify-center py-8">
+            <div x-intersect:enter.margin.500px="$wire.loadMore()" class="flex justify-center py-8">
                 <div class="text-gray-500">
                     <svg
                         class="h-8 w-8 animate-spin"
