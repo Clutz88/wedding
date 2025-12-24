@@ -19,26 +19,31 @@
         <div
             x-data="{
                 lightbox: null,
-                currentIndex: 0,
-                getAllImages() {
-                    return Array.from(document.querySelectorAll('[data-photo-data]')).map(el => JSON.parse(el.dataset.photoData));
+                currentMediaId: null,
+                getAllImageIds() {
+                    return Array.from(document.querySelectorAll('[data-media-id]')).map(el => parseInt(el.dataset.mediaId));
                 },
-                openLightbox(index) {
-                    const images = this.getAllImages();
-                    this.currentIndex = index;
-                    if (images[index]) {
-                        this.lightbox = images[index];
-                    }
+                getImageData(mediaId) {
+                    const el = document.querySelector(`[data-media-id='${mediaId}']`);
+                    return el ? JSON.parse(el.dataset.photoData) : null;
+                },
+                openLightbox(mediaId) {
+                    this.currentMediaId = mediaId;
+                    this.lightbox = this.getImageData(mediaId);
                 },
                 nextImage() {
-                    const images = this.getAllImages();
-                    this.currentIndex = (this.currentIndex + 1) % images.length;
-                    this.lightbox = images[this.currentIndex];
+                    const ids = this.getAllImageIds();
+                    const currentIndex = ids.indexOf(this.currentMediaId);
+                    const nextIndex = (currentIndex + 1) % ids.length;
+                    this.currentMediaId = ids[nextIndex];
+                    this.lightbox = this.getImageData(this.currentMediaId);
                 },
                 prevImage() {
-                    const images = this.getAllImages();
-                    this.currentIndex = (this.currentIndex - 1 + images.length) % images.length;
-                    this.lightbox = images[this.currentIndex];
+                    const ids = this.getAllImageIds();
+                    const currentIndex = ids.indexOf(this.currentMediaId);
+                    const prevIndex = (currentIndex - 1 + ids.length) % ids.length;
+                    this.currentMediaId = ids[prevIndex];
+                    this.lightbox = this.getImageData(this.currentMediaId);
                 }
             }"
             @keydown.arrow-right.window="if (lightbox) nextImage()"
@@ -50,8 +55,9 @@
                     @foreach ($photos as $index => $photo)
                         @if ($index % 4 == 0)
                             <div wire:key="photo-{{ $photo->id }}"
+                                 data-media-id="{{ $photo->id }}"
                                  data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
-                                <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                                <a href="#" @click.prevent="openLightbox({{ $photo->id }})" class="block cursor-pointer">
                                     <img
                                         src="{{ $photo->thumb_url }}"
                                         alt="Photo by {{ $photo->guest_name }}"
@@ -69,8 +75,9 @@
                     @foreach ($photos as $index => $photo)
                         @if ($index % 4 == 1)
                             <div wire:key="photo-{{ $photo->id }}"
+                                 data-media-id="{{ $photo->id }}"
                                  data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
-                                <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                                <a href="#" @click.prevent="openLightbox({{ $photo->id }})" class="block cursor-pointer">
                                     <img
                                         src="{{ $photo->thumb_url }}"
                                         alt="Photo by {{ $photo->guest_name }}"
@@ -88,8 +95,9 @@
                     @foreach ($photos as $index => $photo)
                         @if ($index % 4 == 2)
                             <div wire:key="photo-{{ $photo->id }}"
+                                 data-media-id="{{ $photo->id }}"
                                  data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
-                                <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                                <a href="#" @click.prevent="openLightbox({{ $photo->id }})" class="block cursor-pointer">
                                     <img
                                         src="{{ $photo->thumb_url }}"
                                         alt="Photo by {{ $photo->guest_name }}"
@@ -107,8 +115,9 @@
                     @foreach ($photos as $index => $photo)
                         @if ($index % 4 == 3)
                             <div wire:key="photo-{{ $photo->id }}"
+                                 data-media-id="{{ $photo->id }}"
                                  data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
-                                <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                                <a href="#" @click.prevent="openLightbox({{ $photo->id }})" class="block cursor-pointer">
                                     <img
                                         src="{{ $photo->thumb_url }}"
                                         alt="Photo by {{ $photo->guest_name }}"
