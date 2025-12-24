@@ -17,7 +17,6 @@
         <p class="text-gray-600">No approved photos yet. Be the first to share your photos!</p>
     @else
         <div
-            class="min-h-[1700px] columns-2 gap-4 md:columns-3 lg:columns-4"
             x-data="{
                 lightbox: null,
                 currentIndex: 0,
@@ -45,20 +44,83 @@
             @keydown.arrow-right.window="if (lightbox) nextImage()"
             @keydown.arrow-left.window="if (lightbox) prevImage()"
         >
-            @foreach ($photos as $index => $photo)
-                <div class="mb-4 break-inside-avoid"
-                     data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
-                    <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
-                        <img
-                            src="{{ $photo->thumb_url }}"
-                            alt="Photo by {{ $photo->guest_name }}"
-                            class="h-auto w-full rounded-lg bg-gray-200 transition-transform hover:scale-105"
-                            style="min-height: 400px"
-                            loading="lazy"
-                        />
-                    </a>
+            <div class="flex gap-4">
+                {{-- Column 1 (visible on all screens) --}}
+                <div class="flex-1 space-y-4">
+                    @foreach ($photos as $index => $photo)
+                        @if ($index % 4 == 0)
+                            <div wire:key="photo-{{ $photo->id }}"
+                                 data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
+                                <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                                    <img
+                                        src="{{ $photo->thumb_url }}"
+                                        alt="Photo by {{ $photo->guest_name }}"
+                                        class="h-auto w-full rounded-lg bg-gray-200 transition-transform hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
-            @endforeach
+
+                {{-- Column 2 (visible on all screens) --}}
+                <div class="flex-1 space-y-4">
+                    @foreach ($photos as $index => $photo)
+                        @if ($index % 4 == 1)
+                            <div wire:key="photo-{{ $photo->id }}"
+                                 data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
+                                <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                                    <img
+                                        src="{{ $photo->thumb_url }}"
+                                        alt="Photo by {{ $photo->guest_name }}"
+                                        class="h-auto w-full rounded-lg bg-gray-200 transition-transform hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+                {{-- Column 3 (hidden on small screens) --}}
+                <div class="hidden flex-1 space-y-4 md:block">
+                    @foreach ($photos as $index => $photo)
+                        @if ($index % 4 == 2)
+                            <div wire:key="photo-{{ $photo->id }}"
+                                 data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
+                                <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                                    <img
+                                        src="{{ $photo->thumb_url }}"
+                                        alt="Photo by {{ $photo->guest_name }}"
+                                        class="h-auto w-full rounded-lg bg-gray-200 transition-transform hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+                {{-- Column 4 (hidden on small and medium screens) --}}
+                <div class="hidden flex-1 space-y-4 lg:block">
+                    @foreach ($photos as $index => $photo)
+                        @if ($index % 4 == 3)
+                            <div wire:key="photo-{{ $photo->id }}"
+                                 data-photo-data="{{ json_encode(['url' => $photo->large_url, 'originalUrl' => $photo->original_url, 'title' => 'Photo by ' . $photo->guest_name]) }}">
+                                <a href="#" @click.prevent="openLightbox({{ $index }})" class="block cursor-pointer">
+                                    <img
+                                        src="{{ $photo->thumb_url }}"
+                                        alt="Photo by {{ $photo->guest_name }}"
+                                        class="h-auto w-full rounded-lg bg-gray-200 transition-transform hover:scale-105"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
 
             <!-- Lightbox Modal -->
             <div
