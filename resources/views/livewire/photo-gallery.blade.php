@@ -8,7 +8,7 @@
     <div class="mb-6 flex items-center justify-between"></div>
 
     @if (session()->has('message'))
-        <div class="mb-6 rounded bg-green-100 p-4 text-green-700">
+        <div class="bg-dark-green text-light-green mb-6 rounded p-4 text-center">
             {{ session('message') }}
         </div>
     @endif
@@ -24,10 +24,33 @@
                 images: [],
                 init() {
                     // Initialize images array from initially loaded photos
-                    @php $initIndex = 0; @endphp
+                    @php
+                    $initIndex = 0;
+
+@endphp
                     @foreach ($photos as $photo)
+
+
+
+
+
+
+
+
+
+
                         @foreach ($photo->getMedia('wedding-photos') as $media)
-                            @if($media->hasGeneratedConversion('thumb'))
+
+
+
+
+
+
+
+
+
+
+                            @if ($media->hasGeneratedConversion('thumb'))
                                 this.images.push({
                                     url: '{{ $media->getUrl('large') }}',
                                     originalUrl: '{{ $media->getUrl() }}',
@@ -36,6 +59,16 @@
                             @endif
                         @endforeach
                     @endforeach
+
+
+
+
+
+
+
+
+
+
                 },
                 openLightbox(index) {
                     this.currentIndex = index;
@@ -63,7 +96,7 @@
                     @php
                         // Check if thumb conversion exists
                         $hasThumb = $media->hasGeneratedConversion('thumb');
-                        if (!$hasThumb) {
+                        if (! $hasThumb) {
                             continue; // Skip this image if conversion isn't ready
                         }
 
@@ -72,16 +105,12 @@
                     @endphp
 
                     <div class="mb-4 break-inside-avoid">
-                        <a
-                            href="#"
-                            @click.prevent="openLightbox({{ $currentIndex }})"
-                            class="block cursor-pointer"
-                        >
+                        <a href="#" @click.prevent="openLightbox({{ $currentIndex }})" class="block cursor-pointer">
                             <img
                                 src="{{ $thumbUrl }}"
                                 alt="Photo by {{ $photo->guest_name }}"
-                                class="w-full h-auto rounded-lg transition-transform hover:scale-105 bg-gray-200"
-                                style="min-height: 300px;"
+                                class="h-auto w-full rounded-lg bg-gray-200 transition-transform hover:scale-105"
+                                style="min-height: 300px"
                                 loading="lazy"
                             />
                         </a>
@@ -164,14 +193,27 @@
 
         <!-- Infinite Scroll Trigger -->
         @if ($hasMorePages)
-            <div
-                x-intersect="$wire.loadMore()"
-                class="flex justify-center py-8"
-            >
+            <div x-intersect="$wire.loadMore()" class="flex justify-center py-8">
                 <div class="text-gray-500">
-                    <svg class="animate-spin h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                        class="h-8 w-8 animate-spin"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <circle
+                            class="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            stroke-width="4"
+                        ></circle>
+                        <path
+                            class="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                     </svg>
                 </div>
             </div>

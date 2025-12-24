@@ -42,24 +42,37 @@ class PhotoUploader extends Component
             'photos' => 'required|array|min:1',
         ]);
 
-        $galleryPhoto = GalleryPhoto::create([
-            'guest_name' => $this->guest_name,
-            'is_approved' => true,
-        ]);
+        $galleryPhoto = null;
 
-        foreach ($this->photos as $photo) {
-            $galleryPhoto
-                ->addMedia($photo)
-                ->toMediaCollection('wedding-photos');
+        try {
+            $galleryPhoto = GalleryPhoto::create([
+                'guest_name' => $this->guest_name,
+                'is_approved' => true,
+            ]);
+
+            foreach ($this->photos as $photo) {
+                $galleryPhoto
+                    ->addMedia($photo)
+                    ->toMediaCollection('wedding-photos');
+            }
+
+            session()
+                ->flash(
+                    'message',
+                    'Thank you! Your photos have been uploaded and will appear in the gallery once approved.'
+                );
+
+            $this->redirect(route('wedding-photos'), navigate: true);
+        } catch (\Exception $e) {
+            // Clean up the gallery photo record if media attachment failed
+            if ($galleryPhoto) {
+                $galleryPhoto->delete();
+            }
+
+            session()->flash('error', 'Sorry, there was an error uploading your photos. Please try again.');
+
+            throw $e;
         }
-
-        session()
-            ->flash(
-                'message',
-                'Thank you! Your photos have been uploaded and will appear in the gallery once approved.'
-            );
-
-        $this->redirect(route('wedding-photos'), navigate: true);
     }
 
     public function render(): View
