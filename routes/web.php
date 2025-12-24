@@ -5,6 +5,8 @@ use App\Livewire\GalleryUpload;
 use App\Livewire\Home;
 use App\Livewire\Itinerary;
 use App\Livewire\Page;
+use App\Livewire\PhotoGallery;
+use App\Livewire\PhotoUploader;
 use App\Livewire\Rsvp;
 use App\Livewire\RsvpSearch;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +17,8 @@ Route::get('rsvp', RsvpSearch::class)->name('rsvp.search');
 Route::get('rsvp/{rsvp}', Rsvp::class)->name('rsvp');
 Route::get('gallery', Gallery::class)->name('gallery');
 Route::get('gallery/upload', GalleryUpload::class)->name('gallery.upload');
+Route::get('wedding-photos', PhotoGallery::class)->name('wedding-photos');
+Route::get('upload-photos', PhotoUploader::class)->name('upload-photos');
 Route::get('p/{page:slug}', Page::class)->name('page');
 
 // Redirects
