@@ -16,7 +16,7 @@
         "laravel/tinker": "^2.10.2",
         "mallardduck/blade-boxicons": "^2.4",
         "mallardduck/blade-lucide-icons": "^1.26",
-        "owenvoke/blade-fontawesome": "^2.9.1",
+        "owenvoke/blade-fontawesome": "^3.0.0",
         "sentry/sentry-laravel": "^4.20.0",
         "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-settings": "^3.6.0",
