@@ -9,16 +9,12 @@
         <span class="font-semibold">{{ \App\Facades\Wedding::date()->format('d F Y') }}</span>
         <span class="font-quick text-xs">The Croft Hotel, Darlington</span>
         <div class="mt-8 mb-8 flex flex-col gap-5">
-            <div class="flex flex-col gap-5 md:flex-row">
-                <x-link-button :href="route('rsvp.search')">RSVP</x-link-button>
+            <div class="flex flex-col gap-5 md:flex-row md:flex-wrap md:justify-center md:max-w-110 md:*:basis-[calc(50%-0.625rem)]">
+                <x-link-button :show="app(\App\Settings\Wedding::class)->rsvpDeadline() > now()" :href="route('rsvp.search')">RSVP</x-link-button>
                 <x-link-button :href="route('order-of-service')">Order of Service</x-link-button>
-            </div>
-            <div class="flex flex-col gap-5 md:flex-row">
                 <x-link-button :href="route('page', ['page' => 'useful-info'])">Useful Info</x-link-button>
                 <x-link-button :href="route('page', ['page' => 'menu'])">Food Menu</x-link-button>
-            </div>
-            <div class="flex flex-col gap-5 md:flex-row">
-                <x-link-button :href="route('wedding-photos')" class="mx-auto">Photo Gallery</x-link-button>
+                <x-link-button :href="route('wedding-photos')">Photo Gallery</x-link-button>
             </div>
         </div>
         <img src="{{ Vite::asset('resources/images/flower-bg.avif') }}" class="mt-2 w-56 md:w-96" alt="" />
