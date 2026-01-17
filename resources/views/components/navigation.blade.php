@@ -33,6 +33,7 @@
         >
             <x-navigation-link :href="route('home')" :active="Request::is('home')">Home</x-navigation-link>
             <x-navigation-link
+                :show="app(\App\Settings\Wedding::class)->rsvpDeadline() > now()"
                 :href="route('rsvp.search')"
                 :active="Request::is('rsvp') || Request::is('rsvp.search')"
             >
@@ -43,19 +44,19 @@
             </x-navigation-link>
             <x-navigation-link
                 :href="route('page', ['page' => 'useful-info'])"
-                :active="Request::is('page', ['page' => 'useful-info'])"
+                :active="Request::is('p/useful-info')"
             >
                 Useful Info
             </x-navigation-link>
             <x-navigation-link
                 :href="route('page', ['page' => 'menu'])"
-                :active="Request::is('page', ['page' => 'menu'])"
+                :active="Request::is('p/menu')"
             >
                 Food Menu
             </x-navigation-link>
             <x-navigation-link
                 :href="route('wedding-photos')"
-                :active="Request::is('rsvp') || Request::is('wedding-photos')"
+                :active="Request::is('wedding-photos')"
             >
                 Photo Gallery
             </x-navigation-link>
