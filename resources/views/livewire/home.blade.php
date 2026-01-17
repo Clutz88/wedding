@@ -17,6 +17,6 @@
                 <x-link-button :href="route('wedding-photos')">Photo Gallery</x-link-button>
             </div>
         </div>
-        <img src="{{ Vite::asset('resources/images/flower-bg.avif') }}" class="mt-2 w-56 md:w-96" alt="" />
+        <img src="{{ Vite::asset('resources/images/flower-bg-small.avif') }}" class="mt-2 w-56 md:w-96" alt="" />
     </div>
 </div>
