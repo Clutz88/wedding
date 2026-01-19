@@ -1,4 +1,4 @@
-<nav>
+<nav role="navigation">
     <button
         data-collapse-toggle="navbar-hamburger"
         type="button"
