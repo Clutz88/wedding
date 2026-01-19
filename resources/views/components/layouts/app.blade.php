@@ -44,7 +44,7 @@
     </head>
     <body class="!m-0 flex min-h-screen flex-col">
         <x-header />
-        <div class="flex grow justify-items-center">
+        <div class="flex grow justify-items-center" role="main">
             {{ $slot }}
         </div>
         <x-footer />
