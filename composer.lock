@@ -3790,30 +3790,30 @@
         },
         {
             "name": "mallardduck/blade-boxicons",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mallardduck/blade-boxicons.git",
-                "reference": "de0d53e6bd08bc21973487e84681b71e2f00b889"
+                "reference": "8e4dd1e62cd2b8e41a20b431b5bcd63cf257d6a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mallardduck/blade-boxicons/zipball/de0d53e6bd08bc21973487e84681b71e2f00b889",
-                "reference": "de0d53e6bd08bc21973487e84681b71e2f00b889",
+                "url": "https://api.github.com/repos/mallardduck/blade-boxicons/zipball/8e4dd1e62cd2b8e41a20b431b5bcd63cf257d6a2",
+                "reference": "8e4dd1e62cd2b8e41a20b431b5bcd63cf257d6a2",
                 "shasum": ""
             },
             "require": {
-                "blade-ui-kit/blade-icons": "^1.5",
-                "php": "^7.4 || ^8.0"
+                "blade-ui-kit/blade-icons": "^1.8",
+                "php": "^8.1"
             },
             "replace": {
                 "jfvoliveira/blade-boxicons": "1.1.2"
             },
             "require-dev": {
                 "ext-dom": "*",
-                "orchestra/testbench": "^6.0 || ^7.0 || ^8.0",
-                "phpunit/phpunit": "^8.5.14 || ^9.0",
-                "spatie/phpunit-snapshot-assertions": "^4.2"
+                "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.0|^10.0|^11.0",
+                "spatie/phpunit-snapshot-assertions": "^4.2.14|^5.0"
             },
             "type": "library",
             "extra": {
@@ -3854,7 +3854,7 @@
             ],
             "support": {
                 "issues": "https://github.com/mallardduck/blade-boxicons/issues",
-                "source": "https://github.com/mallardduck/blade-boxicons/tree/2.4.0"
+                "source": "https://github.com/mallardduck/blade-boxicons/tree/2.5.0"
             },
             "funding": [
                 {
@@ -3862,7 +3862,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-16T16:52:16+00:00"
+            "time": "2025-12-29T23:33:50+00:00"
         },
         {
             "name": "mallardduck/blade-lucide-icons",
