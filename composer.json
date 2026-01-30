@@ -23,7 +23,7 @@
         "spatie/livewire-filepond": "^1.5.1"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.16.2",
+        "barryvdh/laravel-debugbar": "^4.0.3",
         "fakerphp/faker": "^1.24.1",
         "laravel/pail": "^1.2.4",
         "laravel/pint": "^1.26.0",
