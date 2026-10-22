@@ -20,7 +20,8 @@
         "sentry/sentry-laravel": "^4.29.0",
         "spatie/laravel-medialibrary": "^11.23.10",
         "spatie/laravel-settings": "^3.10.0",
-        "spatie/livewire-filepond": "^1.6.0"
+        "spatie/livewire-filepond": "^1.6.0",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16.5",
