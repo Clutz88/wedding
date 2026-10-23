@@ -2,19 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\ImageResource\Pages\ListImages;
 use App\Filament\Resources\ImageResource\Pages\CreateImage;
 use App\Filament\Resources\ImageResource\Pages\EditImage;
-use App\Filament\Resources\ImageResource\Pages;
+use App\Filament\Resources\ImageResource\Pages\ListImages;
 use App\Models\Image;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -27,9 +26,9 @@ class ImageResource extends Resource
 
     protected static ?string $label = 'Gallery';
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-photo';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-photo';
 
-    protected static string | \UnitEnum | null $navigationGroup = 'Manage';
+    protected static string|\UnitEnum|null $navigationGroup = 'Manage';
 
     public static function form(Schema $schema): Schema
     {
@@ -39,9 +38,8 @@ class ImageResource extends Resource
                     ->required(),
                 FileUpload::make('location')
                     ->image()
-                    ->optimize('avif')
                     ->imageEditor()
-                    ->imageEditorAspectRatios([
+                    ->imageEditorAspectRatioOptions([
                         null,
                         '16:9',
                         '9:16',
