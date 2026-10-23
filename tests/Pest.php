@@ -1,5 +1,12 @@
 <?php
 
+use App\Settings\Venue;
+use App\Settings\Wedding;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Sleep;
+use Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,9 +18,24 @@
 |
 */
 
-pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+pest()->extend(TestCase::class)
+    ->use(LazilyRefreshDatabase::class)
     ->in('Feature');
+
+/*
+|--------------------------------------------------------------------------
+| Global Isolation
+|--------------------------------------------------------------------------
+|
+| Keep every feature test off the network and make sleeping instant so a
+| retry or backoff cannot slow the suite down.
+|
+*/
+
+pest()->beforeEach(function () {
+    Http::preventStrayRequests();
+    Sleep::fake(syncWithCarbon: true);
+})->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +63,36 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/**
+ * Bind wedding settings for the current test without touching the database.
+ *
+ * @param  array<string, string>  $overrides
+ */
+function fakeWeddingSettings(array $overrides = []): void
 {
-    // ..
+    Wedding::fake([
+        'date' => '2026-03-06 13:30:00',
+        'rsvp_deadline' => '2027-04-10 00:00:00',
+        'groom' => 'Chris',
+        'bride' => 'Kate',
+        ...$overrides,
+    ]);
+}
+
+/**
+ * Bind venue settings for the current test without touching the database.
+ *
+ * @param  array<string, string|null>  $overrides
+ */
+function fakeVenueSettings(array $overrides = []): void
+{
+    Venue::fake([
+        'name' => 'The Croft Hotel',
+        'address_line_one' => 'Croft-on-Tees',
+        'town' => 'Darlington',
+        'postcode' => 'DL2 2ST',
+        'website' => 'https://www.croft-hotel.com/',
+        'maps_link' => 'https://maps.app.goo.gl/rY4pXF4rHU5z6xnT6',
+        ...$overrides,
+    ]);
 }
