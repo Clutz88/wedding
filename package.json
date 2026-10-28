@@ -26,5 +26,8 @@
         "@tailwindcss/vite": "^4.1.11",
         "js-confetti": "^0.13.1"
     },
+    "overrides": {
+        "postcss-selector-parser": "^6.1.5"
+    },
     "version": "0.0.1"
 }
